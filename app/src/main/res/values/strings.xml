@@ -13,4 +13,9 @@
     <string name="info">*Ви - гість, якщо Ви зареєстровані - заповніть поля нижче</string>
     <string name="search_title">Пошук</string>
     <string name="filter_title">Фільтр</string>
+    <string name="lessons_label">Уроки</string>
+    <string name="articles_label">Статті</string>
+    <string name="account_label">Кабінет</string>
+    <string name="package_title">Назва</string>
+    <string name="package_description">Опис</string>
 </resources>

@@ -1,19 +1,25 @@
 package com.agape.datacatalog.packageView;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
+import com.agape.datacatalog.network.PackageEntry;
 
 public class PackageGridFragment extends Fragment {
 
@@ -26,9 +32,24 @@ public class PackageGridFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+//        Log.d("TAG: ", "-------!!!------");
         View view = inflater.inflate(R.layout.fragment_package_grid, container, false);
 
         setUpToolBar(view);
+
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+        PackageCardRecyclerViewAdapter adapter = new PackageCardRecyclerViewAdapter(
+                PackageEntry.initProductEntryList(getResources()));
+        recyclerView.setAdapter(adapter);
+        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
+        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
+        recyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            view.findViewById(R.id.package_grid).setBackgroundResource(R.drawable.package_grid_background_shape);
+        }
 
         return view;
     }
@@ -39,6 +60,8 @@ public class PackageGridFragment extends Fragment {
         if (activity != null){
             activity.setSupportActionBar(toolbar);
         }
+
+        toolbar.setNavigationOnClickListener(new NavigationIconClickListener(getContext(), view.findViewById(R.id.package_grid)));
     }
 
     @Override
