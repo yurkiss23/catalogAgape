@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F9E070</color>
+    <color name="colorPrimaryDark">#FFCC49</color>
+    <color name="colorAccent">#A38205</color>
+    <color name="textColorPrimary">@android:color/black</color>
+    <color name="toolbarIconColor">@color/textColorPrimary</color>
+    <color name="loginPageBackgroundColor">@android:color/black</color>
+    <color name="productGridBackgroundColor">@android:color/black</color>
+</resources>
