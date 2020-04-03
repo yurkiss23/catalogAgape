@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.agape.datacatalog.packageView.PackageGridFragment;
+
 public class MainActivity extends AppCompatActivity implements NavigationHost{
 
     @Override
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
         if (savedInstanceState == null){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new LoginFragment())
+                    .add(R.id.container, new StartFragment())
                     .commit();
         }
     }

@@ -23,6 +23,7 @@ public class NavigationIconClickListener implements View.OnClickListener {
     private View sheet;
     private Interpolator interpolator;
     private int height;
+    private int width;
     private boolean backdropShown = false;
     private Drawable openIcon;
     private Drawable closeIcon;
@@ -47,6 +48,7 @@ public class NavigationIconClickListener implements View.OnClickListener {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
     }
 
     @Override
@@ -62,14 +64,24 @@ public class NavigationIconClickListener implements View.OnClickListener {
 
         final int translateY = height -
                 context.getResources().getDimensionPixelSize(R.dimen.package_grid_reveal_height);
+        final int translateX = width -
+                context.getResources().getDimensionPixelSize(R.dimen.package_grid_reveal_width);
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(sheet, "translationY", backdropShown ? translateY : 0);
-        animator.setDuration(500);
+        ObjectAnimator animatorDown = ObjectAnimator.ofFloat(sheet, "translationY", backdropShown ? translateY : 0);
+        animatorDown.setDuration(500);
         if (interpolator != null) {
-            animator.setInterpolator(interpolator);
+            animatorDown.setInterpolator(interpolator);
         }
-        animatorSet.play(animator);
-        animator.start();
+        animatorSet.play(animatorDown);
+        animatorDown.start();
+
+//        ObjectAnimator animatorRight = ObjectAnimator.ofFloat(sheet, "translationX", backdropShown ? translateX : 0);
+//        animatorRight.setDuration(500);
+//        if (interpolator != null) {
+//            animatorRight.setInterpolator(interpolator);
+//        }
+//        animatorSet.play(animatorRight);
+//        animatorRight.start();
     }
 
     private void updateIcon(View view) {

@@ -7,4 +7,6 @@
     <color name="toolbarIconColor">@color/colorPrimaryText</color>
     <color name="loginPageBackgroundColor">@android:color/black</color>
     <color name="packageGridBackgroundColor">@color/colorPrimary</color>
+
+    <color name="start_background">#FFFFFF</color>
 </resources>

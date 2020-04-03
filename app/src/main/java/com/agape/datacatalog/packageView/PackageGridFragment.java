@@ -62,6 +62,7 @@ public class PackageGridFragment extends Fragment {
         }
 
         toolbar.setNavigationOnClickListener(new NavigationIconClickListener(getContext(), view.findViewById(R.id.package_grid)));
+
     }
 
     @Override
