@@ -18,4 +18,6 @@
     <string name="account_label">Кабінет</string>
     <string name="package_title">Назва</string>
     <string name="package_description">Опис</string>
+    <string name="home_label">На головну</string>
+    <string name="btn_continue">Продовжити</string>
 </resources>

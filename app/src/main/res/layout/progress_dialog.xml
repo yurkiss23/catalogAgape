@@ -5,8 +5,10 @@
     android:layout_gravity="center"
     android:background="@android:color/transparent">
 
-    <ProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/pb_loading"
+        android:indeterminate="true"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

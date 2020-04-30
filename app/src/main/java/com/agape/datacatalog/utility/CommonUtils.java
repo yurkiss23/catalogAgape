@@ -4,13 +4,24 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.widget.ProgressBar;
+
 import com.agape.datacatalog.R;
 public final class CommonUtils {
-    static ProgressDialog progressDialog;
+
     private static final String TAG = "CommonUtils";
+
+    static ProgressDialog progressDialog;
+    static ProgressBar progressBar;
+
     private CommonUtils() {
         // This utility class is not publicly instantiable
     }
+
+    public static void showProgress(Context context){
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+    }
+
     public static ProgressDialog showLoading(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.show();
@@ -23,6 +34,7 @@ public final class CommonUtils {
         progressDialog.setCanceledOnTouchOutside(false);
         return progressDialog;
     }
+
     public static void hideLoading() {
         if (progressDialog == null) {
             return;

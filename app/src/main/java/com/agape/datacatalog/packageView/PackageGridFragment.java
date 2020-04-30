@@ -1,5 +1,6 @@
 package com.agape.datacatalog.packageView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,12 +17,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.agape.datacatalog.MainActivity;
 import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.network.PackageEntry;
 
 public class PackageGridFragment extends Fragment {
+    private Button toHome;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class PackageGridFragment extends Fragment {
                              Bundle savedInstanceState) {
 //        Log.d("TAG: ", "-------!!!------");
         View view = inflater.inflate(R.layout.fragment_package_grid, container, false);
+        toHome = view.findViewById(R.id.btn_home);
 
         setUpToolBar(view);
 
@@ -50,6 +55,14 @@ public class PackageGridFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             view.findViewById(R.id.package_grid).setBackgroundResource(R.drawable.package_grid_background_shape);
         }
+
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
