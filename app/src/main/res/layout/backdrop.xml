@@ -2,16 +2,34 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_news"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:textSize="@dimen/backdrop_textbutton_textsize"
+        android:text="@string/news_label" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_lessons"
+        style="@style/Widget.Agape.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="@dimen/backdrop_textbutton_textsize"
         android:text="@string/lessons_label" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_resources"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="@string/articles_label" />
+        android:textSize="@dimen/backdrop_textbutton_textsize"
+        android:text="@string/resources_label" />
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        style="@style/Widget.Agape.Button.TextButton"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:text="@string/projects_label" />-->
 
     <View
         android:layout_width="150dp"
@@ -20,9 +38,11 @@
         android:background="?attr/colorPrimary" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cabinet"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:textSize="@dimen/backdrop_textbutton_textsize"
         android:text="@string/account_label" />
 
     <com.google.android.material.button.MaterialButton
@@ -30,6 +50,7 @@
         android:id="@+id/btn_home"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:textSize="@dimen/backdrop_textbutton_textsize"
         android:text="@string/home_label" />
 
 </merge>

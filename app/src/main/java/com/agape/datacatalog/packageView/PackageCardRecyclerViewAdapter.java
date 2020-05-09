@@ -37,6 +37,6 @@ public class PackageCardRecyclerViewAdapter extends RecyclerView.Adapter<Package
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 7;
     }
 }

@@ -10,11 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/package_image"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/package_card_image_height"
             android:layout_height="@dimen/package_card_image_height"
             android:background="?attr/colorPrimaryDark"
             android:scaleType="centerCrop" />

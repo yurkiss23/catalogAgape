@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Каталог</string>
+    <string name="app_name">Ресурси Агапе</string>
     <!-- colorScheme -->
     <string name="colorScheme1">https://colorscheme.ru/#3bj1Tw0w0w0w0</string>
     <string name="colorScheme2">https://colorscheme.ru/#0Ok1Tw0w0w0w0</string>
@@ -20,4 +20,7 @@
     <string name="package_description">Опис</string>
     <string name="home_label">На головну</string>
     <string name="btn_continue">Продовжити</string>
+    <string name="projects_label">Проекти</string>
+    <string name="news_label">Новини</string>
+    <string name="resources_label">Ресурси</string>
 </resources>

@@ -8,4 +8,6 @@
     <dimen name="package_grid_reveal_width">100dp</dimen>
     <dimen name="logo_size_start">150dp</dimen>
     <dimen name="logo_size_expand">250dp</dimen>
+
+    <dimen name="backdrop_textbutton_textsize">14dp</dimen>
 </resources>
