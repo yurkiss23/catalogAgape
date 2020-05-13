@@ -10,11 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/package_image"
-            android:layout_width="@dimen/package_card_image_height"
+            android:id="@+id/resource_image"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/package_card_image_height"
             android:background="?attr/colorPrimaryDark"
             android:scaleType="centerCrop" />
@@ -26,14 +26,14 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/package_title"
+                android:id="@+id/resource_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/package_title"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <TextView
-                android:id="@+id/package_description"
+                android:id="@+id/resource_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/package_description"

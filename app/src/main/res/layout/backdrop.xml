@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textSize="@dimen/backdrop_textbutton_textsize"
-        android:text="@string/resources_label" />
+        android:text="@string/video_label" />
 
 <!--    <com.google.android.material.button.MaterialButton-->
 <!--        style="@style/Widget.Agape.Button.TextButton"-->

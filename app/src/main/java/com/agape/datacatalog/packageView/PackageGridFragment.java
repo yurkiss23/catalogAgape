@@ -33,11 +33,11 @@ import java.util.Objects;
 
 public class PackageGridFragment extends Fragment {
 
-    private final String TAG = "MyLOG";
+    private final String TAG = "MyLOG_PGF";
 
     private Button btnToStart, btnNews, btnLessons, btnResources, btnCabinet;
     private RecyclerView recyclerView;
-    private PackageCardRecyclerViewAdapter adapter;
+    private PackageCardRecyclerViewAdapter packageAdapter;
     private Toolbar toolbar;
 
     @Override
@@ -91,8 +91,8 @@ public class PackageGridFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
 
-        adapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
-        recyclerView.setAdapter(adapter);
+        packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
+        recyclerView.setAdapter(packageAdapter);
         int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
         int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
         recyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
@@ -100,8 +100,6 @@ public class PackageGridFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             view.findViewById(R.id.package_grid).setBackgroundResource(R.drawable.package_grid_background_shape);
         }
-
-
     }
 
     private void setBtnNews(){
