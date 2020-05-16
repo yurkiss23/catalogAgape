@@ -27,15 +27,13 @@ import com.agape.datacatalog.R;
 import com.agape.datacatalog.lessonsView.LessonsGridFragment;
 import com.agape.datacatalog.network.PackageEntry;
 import com.agape.datacatalog.newsView.NewsGridFragment;
-import com.agape.datacatalog.resourcesView.ResourcesGridFragment;
-
-import java.util.Objects;
+import com.agape.datacatalog.videoView.VideosGridFragment;
 
 public class PackageGridFragment extends Fragment {
 
     private final String TAG = "MyLOG_PGF";
 
-    private Button btnToStart, btnNews, btnLessons, btnResources, btnCabinet;
+    private Button btnToStart, btnNews, btnLessons, btnVideos, btnCabinet;
     private RecyclerView recyclerView;
     private PackageCardRecyclerViewAdapter packageAdapter;
     private Toolbar toolbar;
@@ -58,7 +56,7 @@ public class PackageGridFragment extends Fragment {
 
         setBtnNews();
         setBtnLessons();
-        setBtnResources();
+        setBtnVideos();
         setBtnToStart();
 
         return view;
@@ -67,11 +65,11 @@ public class PackageGridFragment extends Fragment {
     private void setupViews(View view){
         btnNews = view.findViewById(R.id.btn_news);
         btnLessons = view.findViewById(R.id.btn_lessons);
-        btnResources = view.findViewById(R.id.btn_resources);
+        btnVideos = view.findViewById(R.id.btn_videos);
         btnCabinet = view.findViewById(R.id.btn_cabinet);
         btnToStart = view.findViewById(R.id.btn_home);
         recyclerView = view.findViewById(R.id.recycler_view);
-        toolbar = view.findViewById(R.id.app_bar);
+        toolbar = view.findViewById(R.id.package_app_bar);
     }
 
     private void setUpToolBar(View view){
@@ -106,7 +104,7 @@ public class PackageGridFragment extends Fragment {
         btnNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), true);
+                ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), false);
             }
         });
     }
@@ -115,16 +113,16 @@ public class PackageGridFragment extends Fragment {
         btnLessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new LessonsGridFragment(), true);
+                ((NavigationHost)getActivity()).navigateTo(new LessonsGridFragment(), false);
             }
         });
     }
 
-    private void setBtnResources(){
-        btnResources.setOnClickListener(new View.OnClickListener() {
+    private void setBtnVideos(){
+        btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new ResourcesGridFragment(), true);
+                ((NavigationHost)getActivity()).navigateTo(new VideosGridFragment(), false);
             }
         });
     }

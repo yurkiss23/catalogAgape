@@ -18,7 +18,7 @@
         android:text="@string/lessons_label" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_resources"
+        android:id="@+id/btn_videos"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"

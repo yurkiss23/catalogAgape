@@ -22,7 +22,7 @@ public class ResourcesGridFragment extends Fragment {
     private final String TAG = "MyLOG_RGF";
 
     private RecyclerView resRecyclerView;
-    private List<ResourceEntry> listReasourceEntry;
+    private List<ResourceEntry> listResourceEntry;
     private ResourceCardRecyclerViewAdapter resourceAdapter;
 
     @Override

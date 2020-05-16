@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".packageView.PackageGridFragment">
+    tools:context=".videoView.VideosGridFragment">
 
     <LinearLayout
         style="@style/Widget.Agape.Backdrop"
@@ -15,7 +15,6 @@
         android:paddingTop="88dp"
         android:paddingBottom="100dp">
 
-        <include layout="@layout/backdrop" />
     </LinearLayout>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,19 +22,18 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/package_app_bar"
+            android:id="@+id/video_app_bar"
             style="@style/Widget.Agape.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/menu"
+            app:navigationIcon="@drawable/arrow_back"
             app:title="@string/app_name" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/package_grid"
+        android:id="@+id/video_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:layout_marginTop="56dp"
         android:background="@color/packageGridBackgroundColor"
         android:paddingStart="@dimen/package_grid_spacing"
@@ -44,7 +42,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/video_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

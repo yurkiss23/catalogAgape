@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.agape.datacatalog.packageView.PackageGridFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost{
+
+    private final String TAG = "MyLOG_MA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
