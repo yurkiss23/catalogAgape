@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.agape.datacatalog.packageView.PackageGridFragment;
+import com.agape.datacatalog.videoView.VideosGridFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost{
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
         if (savedInstanceState == null){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new PackageGridFragment())
+                    .add(R.id.container, new VideosGridFragment())
                     .commit();
         }
     }

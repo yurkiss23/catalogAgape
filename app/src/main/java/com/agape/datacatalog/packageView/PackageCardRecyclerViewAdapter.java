@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agape.datacatalog.R;
-import com.agape.datacatalog.network.ImageRequester;
-import com.agape.datacatalog.network.PackageEntry;
+import com.agape.datacatalog.network.requester.ImageRequester;
+import com.agape.datacatalog.network.entries.PackageEntry;
 
 import java.util.List;
 

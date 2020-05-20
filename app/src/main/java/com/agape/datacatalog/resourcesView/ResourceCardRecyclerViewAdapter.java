@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agape.datacatalog.R;
-import com.agape.datacatalog.network.ResourceEntry;
+import com.agape.datacatalog.network.entries.ResourceEntry;
 
 import java.util.List;
 

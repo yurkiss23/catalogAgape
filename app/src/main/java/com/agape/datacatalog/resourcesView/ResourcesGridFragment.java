@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.agape.datacatalog.R;
-import com.agape.datacatalog.network.ResourceEntry;
+import com.agape.datacatalog.network.entries.ResourceEntry;
 import com.agape.datacatalog.packageView.PackageGridItemDecoration;
 
 import java.util.List;

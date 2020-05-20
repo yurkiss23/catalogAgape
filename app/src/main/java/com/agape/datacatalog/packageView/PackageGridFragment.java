@@ -25,7 +25,7 @@ import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.lessonsView.LessonsGridFragment;
-import com.agape.datacatalog.network.PackageEntry;
+import com.agape.datacatalog.network.entries.PackageEntry;
 import com.agape.datacatalog.newsView.NewsGridFragment;
 import com.agape.datacatalog.videoView.VideosGridFragment;
 
