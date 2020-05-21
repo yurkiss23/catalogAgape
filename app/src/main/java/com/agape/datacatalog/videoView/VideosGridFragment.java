@@ -38,6 +38,8 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
     private VideoCardRecyclerViewAdapter videoAdapter;
     private Toolbar videoToolbar;
     private MediaController mediaController;
+
+    private int vSpanCount;
     private int pos;
 
     @Override
@@ -82,11 +84,12 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
 
         videoRecyclerView.setHasFixedSize(true);
         if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            videoRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+            vSpanCount = 1;
         }else {
-            videoRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            vSpanCount = 2;
         }
-
+        videoRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),
+                vSpanCount, GridLayoutManager.VERTICAL, false));
         videoAdapter = new VideoCardRecyclerViewAdapter(VideoEntry.initVideosEntryList(getResources()),
                 this, getContext());
         videoRecyclerView.setAdapter(videoAdapter);

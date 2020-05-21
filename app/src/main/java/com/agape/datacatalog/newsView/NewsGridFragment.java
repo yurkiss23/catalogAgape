@@ -1,11 +1,13 @@
 package com.agape.datacatalog.newsView;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -19,16 +21,20 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
+import com.agape.datacatalog.network.entries.NewsEntry;
 import com.agape.datacatalog.packageView.PackageCardRecyclerViewAdapter;
 import com.agape.datacatalog.packageView.PackageGridFragment;
+import com.agape.datacatalog.packageView.PackageGridItemDecoration;
 
 public class NewsGridFragment extends Fragment {
 
     private final String TAG = "MyLOG_NGF";
 
     private RecyclerView newsRecyclerView;
-    private PackageCardRecyclerViewAdapter newsAdapter;
+    private NewsCardRecyclerViewAdapter newsAdapter;
     private Toolbar newsToolbar;
+
+    private int nSpanCount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +49,8 @@ public class NewsGridFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news_grid, container, false);
 
         setupViews(view);
-        setUpToolBar(view);
+        setUpToolBar();
+        setRecyclerView();
 
         return view;
     }
@@ -53,7 +60,7 @@ public class NewsGridFragment extends Fragment {
         newsToolbar = view.findViewById(R.id.news_app_bar);
     }
 
-    private void setUpToolBar(View view){
+    private void setUpToolBar(){
         AppCompatActivity newsActivity = (AppCompatActivity) getActivity();
         if (newsActivity != null){
             newsActivity.setSupportActionBar(newsToolbar);
@@ -64,6 +71,24 @@ public class NewsGridFragment extends Fragment {
                 ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), false);
             }
         });
+    }
+
+    private void setRecyclerView(){
+        Log.d(TAG, "---recyclerView---");
+
+        newsRecyclerView.setHasFixedSize(true);
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            nSpanCount = 2;
+        }else {
+            nSpanCount = 3;
+        }
+        newsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),
+                nSpanCount, GridLayoutManager.VERTICAL, false));
+        newsAdapter = new NewsCardRecyclerViewAdapter(NewsEntry.initNewsEntryList(getResources()));
+        newsRecyclerView.setAdapter(newsAdapter);
+        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
+        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
+        newsRecyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
     }
 
     @Override

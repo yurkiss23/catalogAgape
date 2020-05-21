@@ -30,9 +30,9 @@ public class ResourceCardRecyclerViewAdapter extends RecyclerView.Adapter<Resour
     @Override
     public void onBindViewHolder(@NonNull ResourceCardViewHolder holder, int position) {
         if (resourceList != null && position < resourceList.size()) {
-            ResourceEntry product = resourceList.get(position);
-            holder.resourceTitle.setText(product.title);
-            holder.resourceDescription.setText(product.description);
+            ResourceEntry resource = resourceList.get(position);
+            holder.resourceTitle.setText(resource.title);
+            holder.resourceDescription.setText(resource.description);
         }
     }
 

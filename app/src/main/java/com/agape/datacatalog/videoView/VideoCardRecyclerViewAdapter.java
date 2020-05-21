@@ -20,8 +20,6 @@ import java.util.List;
 public class VideoCardRecyclerViewAdapter extends RecyclerView.Adapter<VideoCardViewHolder> {
 
     private final String TAG = "MyLOG_VCRVA";
-    private MediaController mediaController;
-    private int pos;
 
     private List<VideoEntry> videoList;
     private VideoRequester videoRequester;
@@ -29,7 +27,9 @@ public class VideoCardRecyclerViewAdapter extends RecyclerView.Adapter<VideoCard
     private OnPreparedListener preparedListener;
     private Context context;
 
-    VideoCardRecyclerViewAdapter(List<VideoEntry> videoList, OnPreparedListener preparedListener, Context context){
+    VideoCardRecyclerViewAdapter(List<VideoEntry> videoList,
+                                 OnPreparedListener preparedListener,
+                                 Context context){
         this.videoList = videoList;
         this.preparedListener = preparedListener;
         this.context = context;
@@ -44,15 +44,15 @@ public class VideoCardRecyclerViewAdapter extends RecyclerView.Adapter<VideoCard
 
     @Override
     public void onBindViewHolder(@NonNull VideoCardViewHolder holder, int position) {
-            Log.d(TAG, "---onBind_videoCard---");
+        Log.d(TAG, "---onBind_videoCard---");
 
         if (videoList != null && position < videoList.size()) {
-            VideoEntry product = videoList.get(position);
-            holder.videoTitle.setText(product.title);
-            holder.videoDescription.setText(product.description);
-            videoRequester.setVideoFromRaw(holder.videoView, product.path);
+            VideoEntry video = videoList.get(position);
+            holder.videoTitle.setText(video.title);
+            holder.videoDescription.setText(video.description);
+            videoRequester.setVideoFromRaw(holder.videoView, video.path);
 
-            preparedListener.playItem(holder.videoView, product.title);
+            preparedListener.playItem(holder.videoView, video.title);
         }
     }
 

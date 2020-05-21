@@ -18,23 +18,22 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoEntry {
-
-    private static final String TAG = "MyLOG_VE";
+public class NewsEntry {
+    private static final String TAG = "MyLOG_NE";
 
     public final String title;
-    public final String description;
-    public final String path;
+    public final String text;
+    public final String image;
 
-    public VideoEntry(String title, String description, String path){
+    public NewsEntry(String title, String text, String image) {
         this.title = title;
-        this.description = description;
-        this.path = path;
+        this.text = text;
+        this.image = image;
     }
 
-    public static List<VideoEntry> initVideosEntryList(Resources resources) {
+    public static List<NewsEntry> initNewsEntryList(Resources resources){
         Log.d(TAG, "---initVideosEntryList---");
-        InputStream inputStream = resources.openRawResource(R.raw.video_resources);
+        InputStream inputStream = resources.openRawResource(R.raw.news_resources);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
         try {
@@ -52,10 +51,10 @@ public class VideoEntry {
                 Log.e(TAG, "Error closing the input stream.", exception);
             }
         }
-        String jsonVideosString = writer.toString();
+        String jsonNewsString = writer.toString();
         Gson gson = new Gson();
-        Type videoListType = new TypeToken<ArrayList<VideoEntry>>() {
+        Type newsListType = new TypeToken<ArrayList<NewsEntry>>() {
         }.getType();
-        return gson.fromJson(jsonVideosString, videoListType);
+        return gson.fromJson(jsonNewsString, newsListType);
     }
 }
