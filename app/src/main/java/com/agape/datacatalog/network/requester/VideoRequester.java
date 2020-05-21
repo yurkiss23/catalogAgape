@@ -33,32 +33,5 @@ public class VideoRequester {
         int id = context.getResources().getIdentifier(path, "raw", context.getPackageName());
         Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + id);
         videoView.setVideoURI(uri);
-//        videoView.requestFocus();
-//        videoView.start();
-//        mediaController = new MediaController(getContext());
-//        mediaController.setAnchorView(videoView);
-//        videoView.setMediaController(mediaController);
-
-//        int pos = 0;
-//        if (mediaController == null){
-//            mediaController = new MediaController(context);
-//            videoView.setMediaController(mediaController);
-//            mediaController.setAnchorView(videoView);
-//        }
-//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                videoView.seekTo(position);
-////                if (position == 0){
-////                    videoView.start();
-////                }
-//                mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
-//                    @Override
-//                    public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-//                        mediaController.setAnchorView(videoView);
-//                    }
-//                });
-//            }
-//        });
     }
 }

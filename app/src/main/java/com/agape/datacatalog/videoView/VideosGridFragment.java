@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
@@ -33,12 +36,15 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
     private RecyclerView videoRecyclerView;
     private List<VideoEntry> listVideoEntry;
     private VideoCardRecyclerViewAdapter videoAdapter;
-    private Toolbar toolbar;
+    private Toolbar videoToolbar;
     private MediaController mediaController;
     private int pos;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,53 +56,20 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
         setRecyclerView(view);
         setUpToolBar(view);
 
-
-//        videoView = view.findViewById(R.id.video_view);
-//        Uri uri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.andr_test);
-//        videoView.setVideoURI(uri);
-//        videoView.requestFocus();
-////        videoView.start();
-////        mediaController = new MediaController(getContext());
-////        mediaController.setAnchorView(videoView);
-////        videoView.setMediaController(mediaController);
-//
-////        int pos = 0;
-//        if (mediaController == null){
-//            mediaController = new MediaController(getContext());
-//            videoView.setMediaController(mediaController);
-//            mediaController.setAnchorView(videoView);
-//        }
-//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                videoView.seekTo(pos);
-////                if (pos == 0){
-////                    videoView.start();
-////                }
-//                mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
-//                    @Override
-//                    public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-//                        mediaController.setAnchorView(videoView);
-//                    }
-//                });
-//            }
-//        });
-
         return view;
     }
 
     private void setView(View view){
         videoRecyclerView = view.findViewById(R.id.video_recycler_view);
-        toolbar = view.findViewById(R.id.video_app_bar);
-//        videoView = view.findViewById(R.id.video_view);
+        videoToolbar = view.findViewById(R.id.video_app_bar);
     }
 
     private void setUpToolBar(View view){
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null){
-            activity.setSupportActionBar(toolbar);
+            activity.setSupportActionBar(videoToolbar);
         }
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        videoToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), false);
@@ -124,8 +97,6 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
 
     @Override
     public void playItem(VideoView videoView, String title) {
-//        Toast.makeText(getContext(), title, Toast.LENGTH_LONG).show();
-
         mediaController = new MediaController(getContext());
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
@@ -141,5 +112,11 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
                 });
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

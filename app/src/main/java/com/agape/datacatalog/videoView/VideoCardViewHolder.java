@@ -20,7 +20,7 @@ public class VideoCardViewHolder extends RecyclerView.ViewHolder {
         this.view = itemView;
         videoTitle = itemView.findViewById(R.id.video_title);
         videoDescription = itemView.findViewById(R.id.video_description);
-        videoView = itemView.findViewById(R.id.video_view);
+        videoView = itemView.findViewById(R.id.video_view_frame);
     }
 
     public View getView() { return view; }
