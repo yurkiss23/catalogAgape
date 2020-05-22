@@ -25,4 +25,5 @@
     <string name="resources_label">Ресурси</string>
     <string name="video_label">Відео</string>
     <string name="news_text">Зміст статті</string>
+    <string name="lesson_text">Зміст уроку</string>
 </resources>

@@ -33,7 +33,7 @@ public class VideoCardRecyclerViewAdapter extends RecyclerView.Adapter<VideoCard
         this.videoList = videoList;
         this.preparedListener = preparedListener;
         this.context = context;
-        videoRequester = videoRequester.getInstance();
+        videoRequester = VideoRequester.getInstance();
     }
     @NonNull
     @Override

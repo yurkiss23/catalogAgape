@@ -18,22 +18,22 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsEntry {
-    private static final String TAG = "MyLOG_NE";
+public class LessonEntry {
+    private static final String TAG = "MyLOG_LE";
 
     public final String title;
     public final String text;
     public final String image;
 
-    public NewsEntry(String title, String text, String image) {
+    public LessonEntry(String title, String text, String image) {
         this.title = title;
         this.text = text;
         this.image = image;
     }
 
-    public static List<NewsEntry> initNewsEntryList(Resources resources){
-        Log.d(TAG, "---initNewsEntryList---");
-        InputStream inputStream = resources.openRawResource(R.raw.news_resources);
+    public static List<LessonEntry> initLessonEntryList(Resources resources){
+        Log.d(TAG, "---initLessonsEntryList---");
+        InputStream inputStream = resources.openRawResource(R.raw.lessons_resources);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
         try {
@@ -51,10 +51,10 @@ public class NewsEntry {
                 Log.e(TAG, "Error closing the input stream.", exception);
             }
         }
-        String jsonNewsString = writer.toString();
+        String jsonLessonString = writer.toString();
         Gson gson = new Gson();
-        Type newsListType = new TypeToken<ArrayList<NewsEntry>>() {
+        Type lessonListType = new TypeToken<ArrayList<LessonEntry>>() {
         }.getType();
-        return gson.fromJson(jsonNewsString, newsListType);
+        return gson.fromJson(jsonLessonString, lessonListType);
     }
 }

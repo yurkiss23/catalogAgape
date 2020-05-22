@@ -16,13 +16,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.agape.datacatalog.NavigationHost;
-import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.network.entries.NewsEntry;
-import com.agape.datacatalog.packageView.PackageCardRecyclerViewAdapter;
 import com.agape.datacatalog.packageView.PackageGridFragment;
 import com.agape.datacatalog.packageView.PackageGridItemDecoration;
 
