@@ -2,32 +2,41 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     app:cardBackgroundColor="@color/colorAccent"
     app:cardElevation="2dp"
     app:cardPreventCornerOverlap="true">
 
-    <include layout="@layout/video_frame"/>
+<!--    <WebView-->
+<!--        android:id="@+id/video_view_frame"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="8dp">
 
-        <TextView
-            android:id="@+id/video_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/package_title"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+        <include layout="@layout/video_frame"/>
+<!--        <TextView-->
+<!--            android:id="@+id/video_title"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/package_title"-->
+<!--            android:textAppearance="?attr/textAppearanceHeadline6" />-->
 
-        <TextView
-            android:id="@+id/video_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/package_description"
-            android:textAppearance="?attr/textAppearanceBody2" />
+<!--        <TextView-->
+<!--            android:id="@+id/video_description"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/package_description"-->
+<!--            android:textAppearance="?attr/textAppearanceBody2" />-->
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

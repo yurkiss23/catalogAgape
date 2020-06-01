@@ -5,6 +5,9 @@
     <string name="colorScheme2">https://colorscheme.ru/#0Ok1Tw0w0w0w0</string>
     <string name="colorScheme3">https://colorscheme.ru/#1lk1Tw0w0w0w0</string>
 
+    <!--keys API-->
+    <string name="google_drive_api_key">AIzaSyD0Ha7i807JsPKH5rZt8s55Fv2h4_aKW5g</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_header">вхід / реєстрація</string>
@@ -26,4 +29,6 @@
     <string name="video_label">Відео</string>
     <string name="news_text">Зміст статті</string>
     <string name="lesson_text">Зміст уроку</string>
+    <string name="first_year">1-й рік навчання</string>
+    <string name="second_year">2-й рік навчання</string>
 </resources>

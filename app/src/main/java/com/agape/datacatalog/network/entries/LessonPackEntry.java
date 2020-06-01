@@ -18,24 +18,26 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsEntry {
-    private static final String TAG = "MyLOG_NE";
+public class LessonPackEntry {
+    private static final String TAG = "MyLOG_LPE";
 
     public final String title;
-    public final String text;
-    public final String url;
+    public final String description;
     public final String image;
+    public final String[] sub;
+    public int pk;
 
-    public NewsEntry(String title, String text, String url, String image) {
+    public LessonPackEntry(String title, String description, String image, String[] sub, int pk) {
         this.title = title;
-        this.text = text;
-        this.url = url;
+        this.description = description;
         this.image = image;
+        this.sub = sub;
+        this.pk = pk;
     }
 
-    public static List<NewsEntry> initNewsEntryList(Resources resources){
-        Log.d(TAG, "---initNewsEntryList---");
-        InputStream inputStream = resources.openRawResource(R.raw.news_resources);
+    public static List<LessonPackEntry> initLessonPackEntryList(Resources resources){
+        Log.d(TAG, "---initLessonPackEntryList---");
+        InputStream inputStream = resources.openRawResource(R.raw.lessons_pack_resources);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
         try {
@@ -53,10 +55,10 @@ public class NewsEntry {
                 Log.e(TAG, "Error closing the input stream.", exception);
             }
         }
-        String jsonNewsString = writer.toString();
+        String jsonLessonPackString = writer.toString();
         Gson gson = new Gson();
-        Type newsListType = new TypeToken<ArrayList<NewsEntry>>() {
+        Type lessonPackListType = new TypeToken<ArrayList<LessonPackEntry>>() {
         }.getType();
-        return gson.fromJson(jsonNewsString, newsListType);
+        return gson.fromJson(jsonLessonPackString, lessonPackListType);
     }
 }

@@ -1,5 +1,6 @@
 package com.agape.datacatalog.newsView;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,15 @@ public class NewsCardRecyclerViewAdapter extends RecyclerView.Adapter<NewsCardVi
 
     private List<NewsEntry> newsList;
     private ImageRequester imageRequester;
+    private OnShowListener showListener;
+    private Context context;
 
-    public NewsCardRecyclerViewAdapter(List<NewsEntry> newsList) {
+    public NewsCardRecyclerViewAdapter(List<NewsEntry> newsList,
+                                       OnShowListener showListener,
+                                       Context context) {
         this.newsList = newsList;
+        this.showListener = showListener;
+        this.context = context;
         imageRequester = ImageRequester.getInstance();
     }
 
@@ -41,6 +48,13 @@ public class NewsCardRecyclerViewAdapter extends RecyclerView.Adapter<NewsCardVi
             holder.newsTitle.setText(news.title);
             holder.newsText.setText(news.text);
             imageRequester.setImageFromUrl(holder.newsImage, news.image);
+
+            holder.getView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showListener.showItem(news.url);
+                }
+            });
         }
     }
 

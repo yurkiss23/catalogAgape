@@ -1,13 +1,10 @@
 package com.agape.datacatalog.newsView;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -20,10 +17,9 @@ import android.view.ViewGroup;
 import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.network.entries.NewsEntry;
-import com.agape.datacatalog.packageView.PackageGridFragment;
-import com.agape.datacatalog.packageView.PackageGridItemDecoration;
+import com.agape.datacatalog.utility.CommonUtils;
 
-public class NewsGridFragment extends Fragment {
+public class NewsGridFragment extends Fragment implements OnShowListener {
 
     private final String TAG = "MyLOG_NGF";
 
@@ -31,12 +27,10 @@ public class NewsGridFragment extends Fragment {
     private NewsCardRecyclerViewAdapter newsAdapter;
     private Toolbar newsToolbar;
 
-    private int nSpanCount;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
     }
 
     @Override
@@ -46,8 +40,8 @@ public class NewsGridFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news_grid, container, false);
 
         setupViews(view);
-        setUpToolBar();
-        setRecyclerView();
+        CommonUtils.setUpToolBar(newsToolbar, getActivity());
+        CommonUtils.setRecyclerView(newsRecyclerView, newsAdapter, getActivity(), getResources(), null);
 
         return view;
     }
@@ -55,42 +49,50 @@ public class NewsGridFragment extends Fragment {
     private void setupViews(View view){
         newsRecyclerView = view.findViewById(R.id.news_recycler_view);
         newsToolbar = view.findViewById(R.id.news_app_bar);
+        newsAdapter = new NewsCardRecyclerViewAdapter(NewsEntry.initNewsEntryList(getResources()),
+                this, getContext());
     }
 
-    private void setUpToolBar(){
-        AppCompatActivity newsActivity = (AppCompatActivity) getActivity();
-        if (newsActivity != null){
-            newsActivity.setSupportActionBar(newsToolbar);
-        }
-        newsToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), false);
-            }
-        });
-    }
-
-    private void setRecyclerView(){
-        Log.d(TAG, "---recyclerView---");
-
-        newsRecyclerView.setHasFixedSize(true);
-        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            nSpanCount = 2;
-        }else {
-            nSpanCount = 3;
-        }
-        newsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),
-                nSpanCount, GridLayoutManager.VERTICAL, false));
-        newsAdapter = new NewsCardRecyclerViewAdapter(NewsEntry.initNewsEntryList(getResources()));
-        newsRecyclerView.setAdapter(newsAdapter);
-        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
-        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
-        newsRecyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
-    }
+//    private void setUpToolBar(){
+//        AppCompatActivity newsActivity = (AppCompatActivity) getActivity();
+//        if (newsActivity != null){
+//            newsActivity.setSupportActionBar(newsToolbar);
+//        }
+//        newsToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), false);
+//            }
+//        });
+//    }
+//
+//    private void loadRecyclerView(){
+//        Log.d(TAG, "---recyclerView---");
+//
+//        newsRecyclerView.setHasFixedSize(true);
+//        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+//            nSpanCount = 2;
+//        }else {
+//            nSpanCount = 3;
+//        }
+//        newsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),
+//                nSpanCount, GridLayoutManager.VERTICAL, false));
+//        newsAdapter = new NewsCardRecyclerViewAdapter(NewsEntry.initNewsEntryList(getResources()));
+//        newsRecyclerView.setAdapter(newsAdapter);
+//        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
+//        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
+//        newsRecyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
+//    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void showItem(String url) {
+        Log.d(TAG, "---showItem---");
+        ((NavigationHost)getActivity()).navigateTo(new NewsItemFragment(), false);
     }
 }

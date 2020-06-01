@@ -2,12 +2,14 @@ package com.agape.datacatalog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.agape.datacatalog.lessonsView.LessonsGridFragment;
+import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.newsView.NewsGridFragment;
 import com.agape.datacatalog.packageView.PackageGridFragment;
 import com.agape.datacatalog.videoView.VideosGridFragment;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
         if (savedInstanceState == null){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new StartFragment())
+                    .add(R.id.container, new LessonsPackFragment())
                     .commit();
         }
     }
@@ -39,5 +41,11 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
             transaction.addToBackStack(null);
         }
         transaction.commit();
+    }
+
+    @Override
+    public void backTo() {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.popBackStack();
     }
 }

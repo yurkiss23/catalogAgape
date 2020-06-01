@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.MediaController;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,11 +46,11 @@ public class VideoCardRecyclerViewAdapter extends RecyclerView.Adapter<VideoCard
 
         if (videoList != null && position < videoList.size()) {
             VideoEntry video = videoList.get(position);
-            holder.videoTitle.setText(video.title);
-            holder.videoDescription.setText(video.description);
-            videoRequester.setVideoFromRaw(holder.videoView, video.path);
+//            holder.videoTitle.setText(video.title);
+//            holder.videoDescription.setText(video.description);
+            videoRequester.setVideoFromRaw(holder.webView, video.path);
 
-            preparedListener.playItem(holder.videoView, video.title);
+            preparedListener.playItem(holder.webView, video.title);
         }
     }
 

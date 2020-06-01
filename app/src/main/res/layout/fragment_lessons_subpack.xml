@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lesson_grid_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".lessonsView.LessonsGridFragment">
+    tools:context=".lessonsView.lessonsPack.LessonsPackFragment">
 
     <LinearLayout
         style="@style/Widget.Agape.Backdrop"
@@ -48,15 +47,5 @@
             android:layout_height="match_parent"/>
 
     </androidx.core.widget.NestedScrollView>
-
-    <ProgressBar
-        android:id="@+id/lesson_pb_loading"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:layout_centerInParent="true"
-        android:visibility="invisible"
-        android:progressDrawable="@color/colorPrimary" />
 
 </FrameLayout>

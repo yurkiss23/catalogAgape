@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Сонечко (УКР)",
+    "description": "Уроки для дошкільнят",
+    "image": "http://77.120.115.215/agape/api/media/resource/image/sonechko_cover_cr_8KpvgD6.jpg",
+    "sub": [
+      "1-й рік навчання",
+      "2-й рік навчання"
+    ]
+  },
+  {
+    "title": "Уроки життя (УКР)",
+    "description": "Уроки для школярів",
+    "image": "http://77.120.115.215/agape/api/media/resource/image/04_y8riFlr.jpg",
+    "sub": [
+      "1-й рік навчання",
+      "2-й рік навчання",
+      "3-й рік навчання",
+      "4-й рік навчання",
+      "5-й рік навчання",
+      "6-й рік навчання",
+      "7-й рік навчання"
+    ]
+  },
+  {
+    "title": "Про головне (УКР)",
+    "description": "Уроки для підлітків",
+    "image": "http://77.120.115.215/agape/api/media/resource/image/about-main_WidshxE.jpg",
+    "sub": [
+      "1-й рік навчання",
+      "2-й рік навчання"
+    ]
+  }
+]

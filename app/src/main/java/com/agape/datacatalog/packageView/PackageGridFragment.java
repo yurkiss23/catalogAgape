@@ -19,14 +19,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.agape.datacatalog.MainActivity;
 import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.lessonsView.LessonsGridFragment;
+import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.network.entries.PackageEntry;
 import com.agape.datacatalog.newsView.NewsGridFragment;
+import com.agape.datacatalog.utility.CommonUtils;
 import com.agape.datacatalog.videoView.VideosGridFragment;
 
 public class PackageGridFragment extends Fragment {
@@ -41,7 +44,7 @@ public class PackageGridFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
     }
 
     @Override
@@ -86,14 +89,15 @@ public class PackageGridFragment extends Fragment {
     }
 
     private void setRecyclerView(View view){
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-
         packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
-        recyclerView.setAdapter(packageAdapter);
-        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
-        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
-        recyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
+        CommonUtils.setRecyclerView(recyclerView, packageAdapter, getActivity(), getResources(), "package");
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
+//
+//        recyclerView.setAdapter(packageAdapter);
+//        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
+//        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
+//        recyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             view.findViewById(R.id.package_grid).setBackgroundResource(R.drawable.package_grid_background_shape);
@@ -104,7 +108,7 @@ public class PackageGridFragment extends Fragment {
         btnNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), false);
+                ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), true);
             }
         });
     }
@@ -113,7 +117,7 @@ public class PackageGridFragment extends Fragment {
         btnLessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new LessonsGridFragment(), false);
+                ((NavigationHost)getActivity()).navigateTo(new LessonsPackFragment(), true);
             }
         });
     }
@@ -122,7 +126,8 @@ public class PackageGridFragment extends Fragment {
         btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NavigationHost)getActivity()).navigateTo(new VideosGridFragment(), false);
+                Toast.makeText(getContext(), "В розробці", Toast.LENGTH_LONG).show();
+//                ((NavigationHost)getActivity()).navigateTo(new VideosGridFragment(), false);
             }
         });
     }
