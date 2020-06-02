@@ -37,13 +37,13 @@
         android:layout_margin="16dp"
         android:background="?attr/colorPrimary" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_cabinet"
-        style="@style/Widget.Agape.Button.TextButton"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:textSize="@dimen/backdrop_textbutton_textsize"
-        android:text="@string/account_label" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/btn_cabinet"-->
+<!--        style="@style/Widget.Agape.Button.TextButton"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:textSize="@dimen/backdrop_textbutton_textsize"-->
+<!--        android:text="@string/account_label" />-->
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Agape.Button.TextButton"

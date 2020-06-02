@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.agape.datacatalog.NavigationHost;
@@ -39,6 +40,7 @@ public class LessonsPackFragment extends Fragment implements OnClickListener {
     private LessonPackRecyclerViewAdapter lessonPackAdapter;
     private Toolbar lessonPackToolbar;
     private List<LessonPackEntry> lessonPackEntryList;
+    private ProgressBar lessonPackProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
@@ -52,8 +54,6 @@ public class LessonsPackFragment extends Fragment implements OnClickListener {
         setupView(view);
         CommonUtils.setUpToolBar(lessonPackToolbar, getActivity());
         setRecyclerView();
-//        CommonUtils.setRecyclerView(lessonPackRecyclerView,
-//                lessonPackAdapter, getActivity(), getResources(), "lessonPack");
         loadLessonRes();
 
         return view;
@@ -62,7 +62,7 @@ public class LessonsPackFragment extends Fragment implements OnClickListener {
     private void setupView(View view){
         lessonPackRecyclerView = view.findViewById(R.id.lessons_recycler_view);
         lessonPackToolbar = view.findViewById(R.id.lessons_app_bar);
-//        lessonPackAdapter = new LessonPackRecyclerViewAdapter(lessonPackEntryList, this);
+        lessonPackProgressBar = view.findViewById(R.id.pb_loading);
     }
 
     private void setRecyclerView(){
@@ -73,6 +73,7 @@ public class LessonsPackFragment extends Fragment implements OnClickListener {
     }
 
     private void loadLessonRes(){
+        lessonPackProgressBar.setVisibility(ProgressBar.VISIBLE);
         LessonDTOService.getInstance()
                 .getJSONApi()
                 .getLessonRes()
@@ -81,13 +82,18 @@ public class LessonsPackFragment extends Fragment implements OnClickListener {
                     public void onResponse(Call<LessonResArrDTO> call, Response<LessonResArrDTO> response) {
 //                        Toast.makeText(getContext(), TAG + "onResponse", Toast.LENGTH_LONG).show();
                         lessonPackEntryList.clear();
-                        List<LessonResDTO> list = Arrays.asList(response.body().getResourcies());
-                        for (LessonResDTO item : list){
-                            LessonPackEntry lessonPackEntry = new LessonPackEntry(item.getTitle(),
-                                    null, item.getMain_image(), null, item.getPk());
-                            lessonPackEntryList.add(lessonPackEntry);
+                        if (response.body() != null){
+                            List<LessonResDTO> list = Arrays.asList(response.body().getResourcies());
+                            for (LessonResDTO item : list){
+                                if (item.getTitle().contains("(УКР)")){
+                                    LessonPackEntry lessonPackEntry = new LessonPackEntry(item.getTitle(),
+                                            null, item.getMain_image(), null, item.getPk());
+                                    lessonPackEntryList.add(lessonPackEntry);
+                                }
+                            }
+                            lessonPackAdapter.notifyDataSetChanged();
                         }
-                        lessonPackAdapter.notifyDataSetChanged();
+                        CommonUtils.setProgressBar(lessonPackProgressBar);
                     }
 
                     @Override
@@ -101,7 +107,7 @@ public class LessonsPackFragment extends Fragment implements OnClickListener {
     public void setOnClick(LessonPackEntry lessonPackEntry, View v) {
         Log.d(TAG, "---setOnClick---");
 //        Toast.makeText(getContext(), "click: " + lessonPackEntry.title, Toast.LENGTH_LONG).show();
-        String[] subPackList = lessonPackEntry.sub;
+        String[] subPackList = {"1", "2"};//lessonPackEntry.sub;
         CommonUtils.setPopup(v, subPackList, getActivity(), getContext());
     }
 }

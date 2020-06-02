@@ -60,7 +60,7 @@ public class LessonsGridFragment extends Fragment {
         lessonRecyclerView = view.findViewById(R.id.lessons_recycler_view);
         lessonToolbar = view.findViewById(R.id.lessons_app_bar);
         lessonAdapter = new LessonCardRecyclerViewAdapter(LessonEntry.initLessonEntryList(getResources()));
-        lessonProgressbar = view.findViewById(R.id.lesson_pb_loading);
+        lessonProgressbar = view.findViewById(R.id.pb_loading);
     }
 
 //    private void setUpToolBar(){
@@ -77,6 +77,7 @@ public class LessonsGridFragment extends Fragment {
 //    }
 
     private void loadDTORecyclerView(){
+        lessonProgressbar.setVisibility(ProgressBar.VISIBLE);
         LessonDTOService.getInstance()
                 .getJSONApi()
                 .getLesson(510)
@@ -84,6 +85,7 @@ public class LessonsGridFragment extends Fragment {
                     @Override
                     public void onResponse(Call<LessonDtlDTO> call, Response<LessonDtlDTO> response) {
                         Toast.makeText(getContext(), TAG + "onResponse", Toast.LENGTH_LONG).show();
+                        CommonUtils.setProgressBar(lessonProgressbar);
                     }
 
                     @Override

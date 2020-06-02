@@ -18,6 +18,8 @@
         <include layout="@layout/backdrop" />
     </LinearLayout>
 
+    <include layout="@layout/progressbar_top"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -29,6 +31,7 @@
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/menu"
             app:title="@string/app_name" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

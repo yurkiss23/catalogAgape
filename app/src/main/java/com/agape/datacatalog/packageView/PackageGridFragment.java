@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.agape.datacatalog.MainActivity;
@@ -40,6 +41,7 @@ public class PackageGridFragment extends Fragment {
     private RecyclerView recyclerView;
     private PackageCardRecyclerViewAdapter packageAdapter;
     private Toolbar toolbar;
+    private ProgressBar packageProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,10 +71,11 @@ public class PackageGridFragment extends Fragment {
         btnNews = view.findViewById(R.id.btn_news);
         btnLessons = view.findViewById(R.id.btn_lessons);
         btnVideos = view.findViewById(R.id.btn_videos);
-        btnCabinet = view.findViewById(R.id.btn_cabinet);
+//        btnCabinet = view.findViewById(R.id.btn_cabinet);
         btnToStart = view.findViewById(R.id.btn_home);
         recyclerView = view.findViewById(R.id.recycler_view);
         toolbar = view.findViewById(R.id.package_app_bar);
+        packageProgressBar = view.findViewById(R.id.pb_loading);
     }
 
     private void setUpToolBar(View view){
@@ -108,6 +111,8 @@ public class PackageGridFragment extends Fragment {
         btnNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                packageProgressBar.setVisibility(ProgressBar.VISIBLE);
+                CommonUtils.setProgressBar(packageProgressBar);
                 ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), true);
             }
         });
@@ -117,6 +122,8 @@ public class PackageGridFragment extends Fragment {
         btnLessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                packageProgressBar.setVisibility(ProgressBar.VISIBLE);
+                CommonUtils.setProgressBar(packageProgressBar);
                 ((NavigationHost)getActivity()).navigateTo(new LessonsPackFragment(), true);
             }
         });
@@ -126,6 +133,8 @@ public class PackageGridFragment extends Fragment {
         btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                packageProgressBar.setVisibility(ProgressBar.VISIBLE);
+                CommonUtils.setProgressBar(packageProgressBar);
                 Toast.makeText(getContext(), "В розробці", Toast.LENGTH_LONG).show();
 //                ((NavigationHost)getActivity()).navigateTo(new VideosGridFragment(), false);
             }
