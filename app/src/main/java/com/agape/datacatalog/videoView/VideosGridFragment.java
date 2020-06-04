@@ -52,7 +52,8 @@ public class VideosGridFragment extends Fragment implements OnPreparedListener {
 
         setView(view);
         CommonUtils.setUpToolBar(videoToolbar, getActivity());
-        CommonUtils.setRecyclerView(videoRecyclerView, videoAdapter, getActivity(), getResources(),"video");
+        CommonUtils.setRecyclerView(videoRecyclerView, videoAdapter,
+                getActivity(), getResources(),"video", null);
 
         return view;
     }

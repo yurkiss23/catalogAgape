@@ -1,5 +1,7 @@
 package com.agape.datacatalog.lessonsView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,25 +18,40 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.R;
+import com.agape.datacatalog.lessonsView.click_listener.LessonGridOnClickListener;
+import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonArrDTO;
+import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonDTO;
 import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonDtlDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResDtlArrDTO;
 import com.agape.datacatalog.lessonsView.lessonsPack.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonEntry;
 import com.agape.datacatalog.utility.CommonUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LessonsGridFragment extends Fragment {
+public class LessonsGridFragment extends Fragment implements LessonGridOnClickListener {
     private final String TAG = "MyLOG_LGF";
 
     private RecyclerView lessonRecyclerView;
     private LessonCardRecyclerViewAdapter lessonAdapter;
     private Toolbar lessonToolbar;
     private ProgressBar lessonProgressbar;
+    private List<LessonEntry> lessonEntryList;
+
+    private int id;
+    private String title;
+
+    public LessonsGridFragment(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,13 +62,13 @@ public class LessonsGridFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(TAG, "---LessonsGridFragment---onCreateView---");
+        Log.d(TAG, "---LessonsGridFragment---onCreateView---" + id);
         View view = inflater.inflate(R.layout.fragment_lessons_grid, container, false);
 
         setupView(view);
         CommonUtils.setUpToolBar(lessonToolbar, getActivity());
-//        CommonUtils.setRecyclerView(lessonRecyclerView, lessonAdapter, getActivity(), getResources(), null);
-        loadDTORecyclerView();
+        setRecyclerView();
+        loadAllLesson();
 
         return view;
     }
@@ -59,7 +76,7 @@ public class LessonsGridFragment extends Fragment {
     private void setupView(View view){
         lessonRecyclerView = view.findViewById(R.id.lessons_recycler_view);
         lessonToolbar = view.findViewById(R.id.lessons_app_bar);
-        lessonAdapter = new LessonCardRecyclerViewAdapter(LessonEntry.initLessonEntryList(getResources()));
+        lessonToolbar.setTitle(title);
         lessonProgressbar = view.findViewById(R.id.pb_loading);
     }
 
@@ -76,16 +93,123 @@ public class LessonsGridFragment extends Fragment {
 //        });
 //    }
 
-    private void loadDTORecyclerView(){
+    private void setRecyclerView(){
+        lessonEntryList = new ArrayList<>();
+        lessonAdapter = new LessonCardRecyclerViewAdapter(lessonEntryList, this);
+        CommonUtils.setRecyclerView(lessonRecyclerView,
+                lessonAdapter, getActivity(), getResources(), null, "");
+    }
+
+    private void loadAllLesson(){
         lessonProgressbar.setVisibility(ProgressBar.VISIBLE);
+        lessonEntryList.clear();
+        getPages();
+        CommonUtils.setProgressBar(lessonProgressbar);
+//        LessonDTOService.getInstance()
+//                .getJSONApi()
+//                .getAllLesson(28, 1)
+//                .enqueue(new Callback<LessonArrDTO>() {
+//                    @Override
+//                    public void onResponse(Call<LessonArrDTO> call, Response<LessonArrDTO> response) {
+////                        Toast.makeText(getContext(), TAG + "onResponse", Toast.LENGTH_LONG).show();
+//                        if (response.body() != null){
+//                            LessonDTO[] list = response.body().getLessons();
+//                            for (LessonDTO item : list){
+//                                LessonEntry lessonEntry = new LessonEntry(
+//                                        item.getNumber_lessons() + ". " + item.getTitle(),null,
+//                                        "http://77.120.115.215/agape/api/media/index/logo/logo.png",
+//                                        item.getPk());
+//                                lessonEntryList.add(lessonEntry);
+//                            }
+//                            lessonAdapter.notifyDataSetChanged();
+//                        }
+//                        CommonUtils.setProgressBar(lessonProgressbar);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<LessonArrDTO> call, Throwable t) {
+//                        Toast.makeText(getContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+    }
+
+    private void getPages(){
         LessonDTOService.getInstance()
                 .getJSONApi()
-                .getLesson(510)
+                .getAllLesson(LessonsPackFragment.subPackList.get(id)[1], 1)
+                .enqueue(new Callback<LessonArrDTO>() {
+                    @Override
+                    public void onResponse(Call<LessonArrDTO> call, Response<LessonArrDTO> response) {
+                        if (response.body() != null){
+                            for (int i = 1; i < response.body().getPages(); ++i){
+                                getListPart(i);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LessonArrDTO> call, Throwable t) {
+                        Toast.makeText(getContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void getListPart(int page){
+        LessonDTOService.getInstance()
+                .getJSONApi()
+                .getAllLesson(LessonsPackFragment.subPackList.get(id)[1], page)
+                .enqueue(new Callback<LessonArrDTO>() {
+                    @Override
+                    public void onResponse(Call<LessonArrDTO> call, Response<LessonArrDTO> response) {
+                        if (response.body() != null){
+                            LessonDTO[] listPart = response.body().getLessons();
+                            for (LessonDTO item : listPart){
+                                Log.d(TAG, "---getListPart---onResponse---");
+                                LessonEntry lessonEntry = new LessonEntry(item.getNumber_lessons(),
+                                        item.getTitle(),null,
+                                        "http://77.120.115.215/agape/api/media/index/logo/logo.png",
+                                        item.getPk());
+                                lessonEntryList.add(lessonEntry);
+                            }
+                            Log.d(TAG, "---addList---" + lessonEntryList.size());
+                            lessonAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LessonArrDTO> call, Throwable t) {
+                        Toast.makeText(getContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void getLesson(String name, int pk) {
+        lessonProgressbar.setVisibility(ProgressBar.VISIBLE);
+//        Toast.makeText(getContext(), name, Toast.LENGTH_LONG).show();
+        showLesson(pk);
+        CommonUtils.setProgressBar(lessonProgressbar);
+    }
+
+    private void showLesson(int pk){
+        LessonDTOService.getInstance()
+                .getJSONApi()
+                .getLesson(pk)
                 .enqueue(new Callback<LessonDtlDTO>() {
                     @Override
                     public void onResponse(Call<LessonDtlDTO> call, Response<LessonDtlDTO> response) {
-                        Toast.makeText(getContext(), TAG + "onResponse", Toast.LENGTH_LONG).show();
-                        CommonUtils.setProgressBar(lessonProgressbar);
+                        if (response.body() != null){
+                            Intent showPdf = new Intent(Intent.ACTION_VIEW ,
+                                    Uri.parse(LessonDTOService.getLessonUrl()[1]
+                                            + response.body().getLesson().getFile()));
+                            startActivity(showPdf);
+                        }
                     }
 
                     @Override
@@ -93,25 +217,5 @@ public class LessonsGridFragment extends Fragment {
                         Toast.makeText(getContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
                     }
                 });
-//        lessonProgressbar.setVisibility(ProgressBar.VISIBLE);
-//        lessonRecyclerView.setHasFixedSize(true);
-////        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-////            lSpanCount = 2;
-////        }else {
-////            lSpanCount = 3;
-////        }
-//        lessonRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
-//        lessonAdapter = new LessonCardRecyclerViewAdapter(LessonEntry.initLessonEntryList(getResources()));
-//        lessonRecyclerView.setAdapter(lessonAdapter);
-//        int largePadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing);
-//        int smallPadding = getResources().getDimensionPixelSize(R.dimen.package_grid_spacing_small);
-//        lessonRecyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
-//        CommonUtils.setProgressBar(getActivity(), lessonProgressbar, new LessonFragment());
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
     }
 }

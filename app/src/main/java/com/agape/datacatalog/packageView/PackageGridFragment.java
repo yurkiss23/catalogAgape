@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -26,12 +25,10 @@ import com.agape.datacatalog.MainActivity;
 import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.NavigationIconClickListener;
 import com.agape.datacatalog.R;
-import com.agape.datacatalog.lessonsView.LessonsGridFragment;
 import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.network.entries.PackageEntry;
 import com.agape.datacatalog.newsView.NewsGridFragment;
 import com.agape.datacatalog.utility.CommonUtils;
-import com.agape.datacatalog.videoView.VideosGridFragment;
 
 public class PackageGridFragment extends Fragment {
 
@@ -93,7 +90,8 @@ public class PackageGridFragment extends Fragment {
 
     private void setRecyclerView(View view){
         packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
-        CommonUtils.setRecyclerView(recyclerView, packageAdapter, getActivity(), getResources(), "package");
+        CommonUtils.setRecyclerView(recyclerView, packageAdapter,
+                getActivity(), getResources(), "package", null);
 //        recyclerView.setHasFixedSize(true);
 //        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
 //
@@ -135,7 +133,7 @@ public class PackageGridFragment extends Fragment {
             public void onClick(View v) {
                 packageProgressBar.setVisibility(ProgressBar.VISIBLE);
                 CommonUtils.setProgressBar(packageProgressBar);
-                Toast.makeText(getContext(), "В розробці", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Роділ в розробці", Toast.LENGTH_LONG).show();
 //                ((NavigationHost)getActivity()).navigateTo(new VideosGridFragment(), false);
             }
         });

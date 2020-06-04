@@ -41,7 +41,8 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
 
         setupViews(view);
         CommonUtils.setUpToolBar(newsToolbar, getActivity());
-        CommonUtils.setRecyclerView(newsRecyclerView, newsAdapter, getActivity(), getResources(), null);
+        CommonUtils.setRecyclerView(newsRecyclerView, newsAdapter,
+                getActivity(), getResources(), null, null);
 
         return view;
     }

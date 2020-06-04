@@ -6,13 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.agape.datacatalog.lessonsView.LessonsGridFragment;
 import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
-import com.agape.datacatalog.newsView.NewsGridFragment;
-import com.agape.datacatalog.packageView.PackageGridFragment;
-import com.agape.datacatalog.videoView.VideosGridFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost{
 
@@ -26,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
         if (savedInstanceState == null){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new LessonsPackFragment())
+                    .add(R.id.container, new StartFragment())
                     .commit();
         }
     }

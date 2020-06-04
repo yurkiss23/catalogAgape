@@ -2,30 +2,25 @@ package com.agape.datacatalog.utility;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.application.CatalogAgape;
-import com.agape.datacatalog.lessonsView.LessonCardRecyclerViewAdapter;
 import com.agape.datacatalog.lessonsView.LessonsGridFragment;
-import com.agape.datacatalog.network.entries.LessonEntry;
-import com.agape.datacatalog.packageView.PackageGridFragment;
+import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.packageView.PackageGridItemDecoration;
 
 import java.util.concurrent.TimeUnit;
@@ -76,7 +71,7 @@ public final class CommonUtils {
 
     @SuppressLint("ResourceType")
     public static void setRecyclerView(RecyclerView recyclerView, RecyclerView.Adapter adapter,
-                                        Activity activity, Resources resources, String type){
+                                        Activity activity, Resources resources, String type, String padding){
         recyclerView.setHasFixedSize(true);
         if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             if (type != null){
@@ -96,24 +91,30 @@ public final class CommonUtils {
         recyclerView.setAdapter(adapter);
         int largePadding = resources.getDimensionPixelSize(R.dimen.package_grid_spacing);
         int smallPadding = resources.getDimensionPixelSize(R.dimen.package_grid_spacing_small);
+        if (padding != null){
+            largePadding = 0;
+            smallPadding = 0;
+        }
         recyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
     }
 
-    public static void setPopup(View view, String[] itemList, Activity activity, Context context){
+    public static void setPopup(View view, Activity activity, Context context, String title){
         popup = new PopupMenu(context, view);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                ((NavigationHost)activity).navigateTo(new LessonsGridFragment(), true);
+                ((NavigationHost)activity).navigateTo(new LessonsGridFragment(item.getItemId(), title),true);
                 return false;
             }
         });
-        if (itemList != null){
-            for (String item:itemList){
-                popup.getMenu().add(item);
+        if (LessonsPackFragment.subPackList != null){
+            for (int[] item : LessonsPackFragment.subPackList){
+                popup.getMenu().add(item[0] + "-й рік навчання");
             }
+            popup.show();
+        }else {
+            Toast.makeText(context, "Уроки в розробці", Toast.LENGTH_SHORT).show();
         }
-        popup.show();
     }
 
 //    public static ProgressDialog showLoading(Context context) {

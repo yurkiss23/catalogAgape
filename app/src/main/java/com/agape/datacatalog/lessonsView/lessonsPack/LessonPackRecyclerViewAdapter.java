@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agape.datacatalog.R;
-import com.agape.datacatalog.lessonsView.lessonsPack.click_listener.OnClickListener;
+import com.agape.datacatalog.lessonsView.click_listener.LessonPackOnClickListener;
 import com.agape.datacatalog.network.entries.LessonPackEntry;
 import com.agape.datacatalog.network.requester.ImageRequester;
 
@@ -20,11 +20,12 @@ public class LessonPackRecyclerViewAdapter extends RecyclerView.Adapter<LessonPa
 
     private List<LessonPackEntry> lessonsPackList;
     private ImageRequester imageRequester;
-    private OnClickListener clickListener;
+    private LessonPackOnClickListener lessonPackClickListener;
 
-    public LessonPackRecyclerViewAdapter(List<LessonPackEntry> lessonsPackList, OnClickListener clickListener) {
+    public LessonPackRecyclerViewAdapter(List<LessonPackEntry> lessonsPackList,
+                                         LessonPackOnClickListener lessonPackClickListener) {
         this.lessonsPackList = lessonsPackList;
-        this.clickListener = clickListener;
+        this.lessonPackClickListener = lessonPackClickListener;
         imageRequester = ImageRequester.getInstance();
     }
 
@@ -48,7 +49,8 @@ public class LessonPackRecyclerViewAdapter extends RecyclerView.Adapter<LessonPa
             holder.getView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickListener.setOnClick(lessonsPackList.get(position), v);
+                    lessonPackClickListener.setOnClick(lessonsPackList.get(position).pk,
+                            lessonsPackList.get(position).title, v);
                 }
             });
         }

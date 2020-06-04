@@ -16,19 +16,24 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class LessonEntry {
     private static final String TAG = "MyLOG_LE";
 
+    public final int number;
     public final String title;
     public final String text;
     public final String image;
+    public final int pk;
 
-    public LessonEntry(String title, String text, String image) {
+    public LessonEntry(int number, String title, String text, String image, int pk) {
+        this.number = number;
         this.title = title;
         this.text = text;
         this.image = image;
+        this.pk = pk;
     }
 
     public static List<LessonEntry> initLessonEntryList(Resources resources){

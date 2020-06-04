@@ -34,7 +34,8 @@ public class ResourcesGridFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_resources_grid, container, false);
 
         setView(view);
-        CommonUtils.setRecyclerView(resRecyclerView, resourceAdapter, getActivity(), getResources(), null);
+        CommonUtils.setRecyclerView(resRecyclerView, resourceAdapter,
+                getActivity(), getResources(), null, null);
 
         return view;
     }
