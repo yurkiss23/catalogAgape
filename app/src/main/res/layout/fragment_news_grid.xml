@@ -17,6 +17,8 @@
 
     </LinearLayout>
 
+    <include layout="@layout/progressbar_top"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -34,6 +36,7 @@
         android:id="@+id/news_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="56dp"
         android:background="@color/packageGridBackgroundColor"
         android:paddingStart="@dimen/package_grid_spacing"
@@ -43,6 +46,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_recycler_view"
+            android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.network.entries.NewsEntry;
 import com.agape.datacatalog.network.requester.ImageRequester;
+import com.agape.datacatalog.newsView.click_listener.OnShowListener;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package com.agape.datacatalog.lessonsView.lessonsPack.network;
+package com.agape.datacatalog.lessonsView.network;
 
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonArrDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonDtlDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResDtlArrDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResArrDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonArrDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonDtlDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonResDtlArrDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonResArrDTO;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

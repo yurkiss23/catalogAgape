@@ -25,12 +25,14 @@ public class NewsEntry {
     public final String text;
     public final String url;
     public final String image;
+    public final int pk;
 
-    public NewsEntry(String title, String text, String url, String image) {
+    public NewsEntry(String title, String text, String url, String image, int pk) {
         this.title = title;
         this.text = text;
         this.url = url;
         this.image = image;
+        this.pk = pk;
     }
 
     public static List<NewsEntry> initNewsEntryList(Resources resources){

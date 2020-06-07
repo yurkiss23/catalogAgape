@@ -1,17 +1,17 @@
-package com.agape.datacatalog.lessonsView.lessonsPack.network;
+package com.agape.datacatalog.newsView.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LessonDTOService {
-    private static LessonDTOService mInstance;
+public class NewsDTOService {
+    private static NewsDTOService mInstance;
     private static final String BASE_URL = "http://77.120.115.215/agape/api/";
     private static final String MEDIA_URL = BASE_URL + "media/";
     private Retrofit mRetrofit;
 
-    private LessonDTOService(){
+    private NewsDTOService(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -25,17 +25,17 @@ public class LessonDTOService {
                 .build();
     }
 
-    public static LessonDTOService getInstance(){
+    public static NewsDTOService getInstance(){
         if (mInstance == null){
-            mInstance = new LessonDTOService();
+            mInstance = new NewsDTOService();
         }
         return mInstance;
     }
 
-    public static String[] getLessonUrl(){
+    public static String[] getNewsUrl(){
         String[] urls = {BASE_URL, MEDIA_URL};
         return urls;
     }
 
-    public LessonDTOHolderApi getJSONApi(){return mRetrofit.create(LessonDTOHolderApi.class);}
+    public NewsDTOHolderApi getJSONApi(){return mRetrofit.create(NewsDTOHolderApi.class);}
 }

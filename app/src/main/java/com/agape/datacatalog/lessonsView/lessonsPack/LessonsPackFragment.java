@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.lessonsView.click_listener.LessonPackOnClickListener;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResArrDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResDtlArrDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonResDtlDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.network.LessonDTOService;
+import com.agape.datacatalog.lessonsView.dto.LessonResArrDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonResDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonResDtlArrDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonResDtlDTO;
+import com.agape.datacatalog.lessonsView.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonPackEntry;
 import com.agape.datacatalog.utility.CommonUtils;
 
@@ -68,7 +68,7 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
         lessonPackEntryList = new ArrayList<>();
         lessonPackAdapter = new LessonPackRecyclerViewAdapter(lessonPackEntryList, this);
         CommonUtils.setRecyclerView(lessonPackRecyclerView, lessonPackAdapter,
-                getActivity(), getResources(), "lessonPack", null);
+                getActivity(), getResources(), new int[]{1, 2}, null);
     }
 
     private void loadLessonRes(){

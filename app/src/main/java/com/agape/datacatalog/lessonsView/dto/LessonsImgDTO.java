@@ -1,4 +1,4 @@
-package com.agape.datacatalog.lessonsView.lessonsPack.dto;
+package com.agape.datacatalog.lessonsView.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

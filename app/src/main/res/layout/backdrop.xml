@@ -5,24 +5,27 @@
         android:id="@+id/btn_news"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:textSize="@dimen/backdrop_textbutton_textsize"
+        android:textStyle="italic"
         android:text="@string/news_label" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_lessons"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:textSize="@dimen/backdrop_textbutton_textsize"
+        android:textStyle="italic"
         android:text="@string/lessons_label" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_videos"
         style="@style/Widget.Agape.Button.TextButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:textSize="@dimen/backdrop_textbutton_textsize"
+        android:textStyle="italic"
         android:text="@string/video_label" />
 
 <!--    <com.google.android.material.button.MaterialButton-->
@@ -49,8 +52,9 @@
         style="@style/Widget.Agape.Button.TextButton"
         android:id="@+id/btn_home"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:textSize="@dimen/backdrop_textbutton_textsize"
+        android:textStyle="italic"
         android:text="@string/home_label" />
 
 </merge>

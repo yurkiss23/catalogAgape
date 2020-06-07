@@ -9,5 +9,5 @@
     <dimen name="logo_size_start">150dp</dimen>
     <dimen name="logo_size_expand">250dp</dimen>
 
-    <dimen name="backdrop_textbutton_textsize">14dp</dimen>
+    <dimen name="backdrop_textbutton_textsize">24dp</dimen>
 </resources>

@@ -18,14 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.lessonsView.click_listener.LessonGridOnClickListener;
 import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonArrDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.dto.LessonDtlDTO;
-import com.agape.datacatalog.lessonsView.lessonsPack.network.LessonDTOService;
+import com.agape.datacatalog.lessonsView.dto.LessonArrDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonDTO;
+import com.agape.datacatalog.lessonsView.dto.LessonDtlDTO;
+import com.agape.datacatalog.lessonsView.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonEntry;
 import com.agape.datacatalog.utility.CommonUtils;
 
@@ -47,6 +46,8 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
 
     private int id;
     private String title;
+
+    public LessonsGridFragment(){}
 
     public LessonsGridFragment(int id, String title) {
         this.id = id;
@@ -96,8 +97,8 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
     private void setRecyclerView(){
         lessonEntryList = new ArrayList<>();
         lessonAdapter = new LessonCardRecyclerViewAdapter(lessonEntryList, this);
-        CommonUtils.setRecyclerView(lessonRecyclerView,
-                lessonAdapter, getActivity(), getResources(), null, "");
+        CommonUtils.setRecyclerView(lessonRecyclerView, lessonAdapter,
+                getActivity(), getResources(), new int[]{1, 2}, "");
     }
 
     private void loadAllLesson(){
@@ -165,6 +166,7 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
                             LessonDTO[] listPart = response.body().getLessons();
                             for (LessonDTO item : listPart){
                                 Log.d(TAG, "---getListPart---onResponse---");
+//                                String s = getLessonImg(item.getPk());
                                 LessonEntry lessonEntry = new LessonEntry(item.getNumber_lessons(),
                                         item.getTitle(),null,
                                         "http://77.120.115.215/agape/api/media/index/logo/logo.png",

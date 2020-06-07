@@ -3,11 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".newsView.NewsItemFragment">
 
-    <WebView
-        android:id="@+id/news_view"
+    <LinearLayout
+        style="@style/Widget.Agape.Backdrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="88dp"
+        android:paddingBottom="100dp">
+
+    </LinearLayout>
+
+    <include layout="@layout/progressbar_top"/>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/news_app_bar"
+            style="@style/Widget.Agape.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="@string/news_label" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/news_grid"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_marginTop="56dp"-->
+<!--        android:background="@color/packageGridBackgroundColor"-->
+<!--        android:paddingStart="@dimen/package_grid_spacing"-->
+<!--        android:paddingEnd="@dimen/package_grid_spacing"-->
+<!--        android:elevation="8dp"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/news_recycler_view"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"/>-->
+
+<!--    </androidx.core.widget.NestedScrollView>-->
 
 </FrameLayout>

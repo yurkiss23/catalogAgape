@@ -1,4 +1,4 @@
-package com.agape.datacatalog.newsView;
+package com.agape.datacatalog.newsView.click_listener;
 
 public interface OnShowListener {
     void showItem(String url);

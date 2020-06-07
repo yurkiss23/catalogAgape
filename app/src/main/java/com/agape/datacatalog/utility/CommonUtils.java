@@ -71,20 +71,33 @@ public final class CommonUtils {
 
     @SuppressLint("ResourceType")
     public static void setRecyclerView(RecyclerView recyclerView, RecyclerView.Adapter adapter,
-                                        Activity activity, Resources resources, String type, String padding){
+                                        Activity activity, Resources resources, int[] span, String padding){
         recyclerView.setHasFixedSize(true);
         if (activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            if (type != null){
-                cSpanCount = 1;
-            }else {
-                cSpanCount = 2;
-            }
+            cSpanCount = span[0];
+//            if (type != null){
+//                cSpanCount = 1;
+//            }else {
+//                cSpanCount = 2;
+//            }
         }else {
-            if (type != null){
-                cSpanCount = 2;
-            }else {
-                cSpanCount = 3;
-            }
+            cSpanCount = span[1];
+//            if (type == null){
+//                cSpanCount = 3;
+//            }
+//            switch (type){
+//                case "1": cSpanCount = 1;
+//                    break;
+//                case "2": cSpanCount = 2;
+//                    break;
+//                case "3": cSpanCount = 3;
+//                    break;
+//            }
+//            if (type != null){
+//                cSpanCount = 2;
+//            }else {
+//                cSpanCount = 3;
+//            }
         }
         recyclerView.setLayoutManager(new GridLayoutManager(CatalogAgape.getAppContext(),
                 cSpanCount, GridLayoutManager.VERTICAL, false));
@@ -92,8 +105,8 @@ public final class CommonUtils {
         int largePadding = resources.getDimensionPixelSize(R.dimen.package_grid_spacing);
         int smallPadding = resources.getDimensionPixelSize(R.dimen.package_grid_spacing_small);
         if (padding != null){
-            largePadding = 0;
-            smallPadding = 0;
+            largePadding = Integer.parseInt(padding);
+            smallPadding = largePadding / 2;
         }
         recyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
     }

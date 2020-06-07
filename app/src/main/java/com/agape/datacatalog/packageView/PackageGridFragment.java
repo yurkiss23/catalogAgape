@@ -91,7 +91,7 @@ public class PackageGridFragment extends Fragment {
     private void setRecyclerView(View view){
         packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
         CommonUtils.setRecyclerView(recyclerView, packageAdapter,
-                getActivity(), getResources(), "package", null);
+                getActivity(), getResources(), new int[]{1, 2}, null);
 //        recyclerView.setHasFixedSize(true);
 //        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
 //
@@ -111,6 +111,7 @@ public class PackageGridFragment extends Fragment {
             public void onClick(View v) {
                 packageProgressBar.setVisibility(ProgressBar.VISIBLE);
                 CommonUtils.setProgressBar(packageProgressBar);
+//                Toast.makeText(getContext(), "Роділ в розробці", Toast.LENGTH_LONG).show();
                 ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), true);
             }
         });

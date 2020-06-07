@@ -1,15 +1,18 @@
-package com.agape.datacatalog.lessonsView.lessonsPack.dto;
+package com.agape.datacatalog.newsView.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LessonDTO {
+public class NewsResDTO {
     @SerializedName("pk")
     @Expose
     private int pk;
-    @SerializedName("number_lessons")
+    @SerializedName("main_image")
     @Expose
-    private int number_lessons;
+    private String main_image;
+    @SerializedName("data")
+    @Expose
+    private String data;
     @SerializedName("title")
     @Expose
     private String title;
@@ -18,9 +21,13 @@ public class LessonDTO {
 
     public void setPk(int pk) { this.pk = pk; }
 
-    public int getNumber_lessons() { return number_lessons; }
+    public String getMain_image() { return main_image; }
 
-    public void setNumber_lessons(int number_lessons) { this.number_lessons = number_lessons; }
+    public void setMain_image(String main_image) { this.main_image = main_image; }
+
+    public String getData() { return data; }
+
+    public void setData(String data) { this.data = data; }
 
     public String getTitle() { return title; }
 
@@ -28,9 +35,10 @@ public class LessonDTO {
 
     @Override
     public String toString() {
-        return "LessonDTO{" +
+        return "NewsResDTO{" +
                 "pk=" + pk +
-                ", number_lessons=" + number_lessons +
+                ", main_image='" + main_image + '\'' +
+                ", data='" + data + '\'' +
                 ", title='" + title + '\'' +
                 '}';
     }

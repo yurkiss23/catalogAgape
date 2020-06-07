@@ -35,7 +35,7 @@ public class ResourcesGridFragment extends Fragment {
 
         setView(view);
         CommonUtils.setRecyclerView(resRecyclerView, resourceAdapter,
-                getActivity(), getResources(), null, null);
+                getActivity(), getResources(), new int[]{1, 2}, null);
 
         return view;
     }
