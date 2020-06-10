@@ -1,9 +1,11 @@
 package com.agape.datacatalog.newsView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.agape.datacatalog.NavigationHost;
@@ -24,6 +27,8 @@ import com.agape.datacatalog.newsView.dto.NewsResArrDTO;
 import com.agape.datacatalog.newsView.dto.NewsResDTO;
 import com.agape.datacatalog.newsView.network.NewsDTOService;
 import com.agape.datacatalog.utility.CommonUtils;
+import com.agape.datacatalog.utility.ListUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +44,10 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
     private RecyclerView newsRecyclerView;
     private NewsCardRecyclerViewAdapter newsAdapter;
     private Toolbar newsToolbar;
-    private List<NewsEntry> newsEntryList;
+//    private List<NewsEntry> newsEntryList;
     private ProgressBar newsProgressBar;
+    private FloatingActionButton newsFab;
+    private NestedScrollView newsView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,13 +58,18 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         Log.d(TAG, "---NewsGridFragment---onCreateView---");
         View view = inflater.inflate(R.layout.fragment_news_grid, container, false);
 
         setupViews(view);
         CommonUtils.setUpToolBar(newsToolbar, getActivity());
         setRecyclerView();
-        loadAllNews();
+        loadNewsList();
+        setOnScrollNewsGrid();
+        setOnClickNewsFAB();
+//        loadAllNews();
+//        newsFab.show();
 
         return view;
     }
@@ -68,6 +80,8 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
         newsAdapter = new NewsCardRecyclerViewAdapter(NewsEntry.initNewsEntryList(getResources()),
                 this, getContext());
         newsProgressBar = view.findViewById(R.id.pb_loading);
+        newsFab = view.findViewById(R.id.floating_action_button);
+        newsView = view.findViewById(R.id.news_grid);
     }
 
 //    private void setUpToolBar(){
@@ -85,11 +99,11 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
 
     private void setRecyclerView(){
         Log.d(TAG, "---recyclerView---");
-        newsEntryList = new ArrayList<>();
-        newsAdapter = new NewsCardRecyclerViewAdapter(newsEntryList, this, getContext());
+//        newsEntryList = new ArrayList<>();
+        newsAdapter = new NewsCardRecyclerViewAdapter(ListUtils.newsEntryList, this, getContext());
         CommonUtils.setRecyclerView(newsRecyclerView, newsAdapter,
-                getActivity(), getResources(), new int[]{1, 3}, "2");
-
+                getActivity(), getResources(), new int[]{1, 2}, "2");
+//        newsFab.show();
 //        newsRecyclerView.setHasFixedSize(true);
 //        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
 //            nSpanCount = 2;
@@ -105,35 +119,63 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
 //        newsRecyclerView.addItemDecoration(new PackageGridItemDecoration(largePadding, smallPadding));
     }
 
-    private void loadAllNews(){
-        Log.d(TAG, "---loadAllNews---newsEntryList-size = " + newsEntryList.size());
+    private void loadNewsList(){
         newsProgressBar.setVisibility(ProgressBar.VISIBLE);
-        NewsDTOService.getInstance()
-                .getJSONApi()
-                .getAllNews()
-                .enqueue(new Callback<NewsResArrDTO>() {
-                    @Override
-                    public void onResponse(Call<NewsResArrDTO> call, Response<NewsResArrDTO> response) {
-//                        Toast.makeText(getContext(), "---onResponse---", Toast.LENGTH_LONG).show();
-                        if (response.body() != null){
-                            newsEntryList.clear();
-                            NewsResDTO[] list = response.body().getPopular_news();
-                            for (NewsResDTO item : list){
-                                NewsEntry newsEntry = new NewsEntry(item.getTitle(), null, null,
-                                        NewsDTOService.getNewsUrl()[1] + item.getMain_image(), item.getPk());
-                                newsEntryList.add(newsEntry);
-                            }
-                            newsAdapter.notifyDataSetChanged();
-                        }
-                        CommonUtils.setProgressBar(newsProgressBar);
-                    }
-
-                    @Override
-                    public void onFailure(Call<NewsResArrDTO> call, Throwable t) {
-                        Toast.makeText(getContext(), "---onFailure---", Toast.LENGTH_LONG).show();
-                    }
-                });
+        newsAdapter.notifyDataSetChanged();
+        CommonUtils.setProgressBar(newsProgressBar);
+//        newsFab.show();
     }
+
+    private void setOnScrollNewsGrid(){
+        newsView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                Toast.makeText(getContext(), TAG + "scroll", Toast.LENGTH_SHORT).show();
+                newsFab.show();
+            }
+        });
+    }
+
+    private void setOnClickNewsFAB(){
+        newsFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getContext(), TAG + "to_top", Toast.LENGTH_SHORT).show();
+                newsView.fullScroll(ScrollView.FOCUS_UP);
+                newsFab.setVisibility(FloatingActionButton.GONE);
+            }
+        });
+    }
+
+//    private void loadAllNews(){
+//        Log.d(TAG, "---loadAllNews---newsEntryList-size = " + newsEntryList.size());
+//        newsProgressBar.setVisibility(ProgressBar.VISIBLE);
+//        NewsDTOService.getInstance()
+//                .getJSONApi()
+//                .getAllNews()
+//                .enqueue(new Callback<NewsResArrDTO>() {
+//                    @Override
+//                    public void onResponse(Call<NewsResArrDTO> call, Response<NewsResArrDTO> response) {
+////                        Toast.makeText(getContext(), "---onResponse---", Toast.LENGTH_LONG).show();
+//                        if (response.body() != null){
+//                            newsEntryList.clear();
+//                            NewsResDTO[] list = response.body().getPopular_news();
+//                            for (NewsResDTO item : list){
+//                                NewsEntry newsEntry = new NewsEntry(item.getTitle(), null, null,
+//                                        NewsDTOService.getNewsUrl()[1] + item.getMain_image(), item.getPk());
+//                                newsEntryList.add(newsEntry);
+//                            }
+//                            newsAdapter.notifyDataSetChanged();
+//                        }
+//                        CommonUtils.setProgressBar(newsProgressBar);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<NewsResArrDTO> call, Throwable t) {
+//                        Toast.makeText(getContext(), "---onFailure---", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

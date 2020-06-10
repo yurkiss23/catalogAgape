@@ -19,6 +19,8 @@
 
     <include layout="@layout/progressbar_top"/>
 
+    <include layout="@layout/fab"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -41,6 +43,7 @@
         android:paddingStart="@dimen/package_grid_spacing"
         android:paddingEnd="@dimen/package_grid_spacing"
         android:elevation="8dp"
+        android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView

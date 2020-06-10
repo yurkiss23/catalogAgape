@@ -1,6 +1,7 @@
 package com.agape.datacatalog.packageView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.network.entries.PackageEntry;
 import com.agape.datacatalog.newsView.NewsGridFragment;
 import com.agape.datacatalog.utility.CommonUtils;
+import com.agape.datacatalog.utility.ListUtils;
 
 public class PackageGridFragment extends Fragment {
 
@@ -49,12 +51,14 @@ public class PackageGridFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Log.d(TAG, "---PackageGridFragment---onCreateView---");
         View view = inflater.inflate(R.layout.fragment_package_grid, container, false);
 
         setupViews(view);
         setUpToolBar(view);
         setRecyclerView(view);
+        initDataLists();
 
         setBtnNews();
         setBtnLessons();
@@ -103,6 +107,10 @@ public class PackageGridFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             view.findViewById(R.id.package_grid).setBackgroundResource(R.drawable.package_grid_background_shape);
         }
+    }
+
+    private void initDataLists(){
+        ListUtils.initLists();
     }
 
     private void setBtnNews(){

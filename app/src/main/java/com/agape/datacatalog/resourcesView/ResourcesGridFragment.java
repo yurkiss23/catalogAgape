@@ -1,5 +1,6 @@
 package com.agape.datacatalog.resourcesView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ public class ResourcesGridFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Log.d(TAG, "---ResourcesGridFragment---onCreateView---");
         View view = inflater.inflate(R.layout.fragment_resources_grid, container, false);
 

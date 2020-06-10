@@ -1,5 +1,6 @@
 package com.agape.datacatalog.lessonsView.lessonsPack;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +23,7 @@ import com.agape.datacatalog.lessonsView.dto.LessonResDtlDTO;
 import com.agape.datacatalog.lessonsView.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonPackEntry;
 import com.agape.datacatalog.utility.CommonUtils;
+import com.agape.datacatalog.utility.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
     private RecyclerView lessonPackRecyclerView;
     private LessonPackRecyclerViewAdapter lessonPackAdapter;
     private Toolbar lessonPackToolbar;
-    private List<LessonPackEntry> lessonPackEntryList;
+//    private List<LessonPackEntry> lessonPackEntryList;
     private ProgressBar lessonPackProgressBar;
 
     public static List<int[]> subPackList;
@@ -47,13 +49,15 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         Log.d(TAG, "---onCreateView---");
         View view = inflater.inflate(R.layout.fragment_lessons_pack, container, false);
 
         setupView(view);
         CommonUtils.setUpToolBar(lessonPackToolbar, getActivity());
         setRecyclerView();
-        loadLessonRes();
+        loadLessonPackList();
+//        loadLessonRes();
 
         return view;
     }
@@ -65,42 +69,48 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
     }
 
     private void setRecyclerView(){
-        lessonPackEntryList = new ArrayList<>();
-        lessonPackAdapter = new LessonPackRecyclerViewAdapter(lessonPackEntryList, this);
+//        lessonPackEntryList = new ArrayList<>();
+        lessonPackAdapter = new LessonPackRecyclerViewAdapter(ListUtils.lessonPackEntryList, this);
         CommonUtils.setRecyclerView(lessonPackRecyclerView, lessonPackAdapter,
                 getActivity(), getResources(), new int[]{1, 2}, null);
     }
 
-    private void loadLessonRes(){
+    private void loadLessonPackList(){
         lessonPackProgressBar.setVisibility(ProgressBar.VISIBLE);
-        LessonDTOService.getInstance()
-                .getJSONApi()
-                .getLessonRes()
-                .enqueue(new Callback<LessonResArrDTO>() {
-                    @Override
-                    public void onResponse(Call<LessonResArrDTO> call, Response<LessonResArrDTO> response) {
-//                        Toast.makeText(getContext(), TAG + "onResponse", Toast.LENGTH_LONG).show();
-                        lessonPackEntryList.clear();
-                        if (response.body() != null){
-                            LessonResDTO[] list = response.body().getResourcies();
-                            for (LessonResDTO item : list){
-                                if (item.getTitle().contains("(УКР)")){
-                                    LessonPackEntry lessonPackEntry = new LessonPackEntry(item.getTitle(),
-                                            null, item.getMain_image(), null, item.getPk());
-                                    lessonPackEntryList.add(lessonPackEntry);
-                                }
-                            }
-                            lessonPackAdapter.notifyDataSetChanged();
-                        }
-                        CommonUtils.setProgressBar(lessonPackProgressBar);
-                    }
-
-                    @Override
-                    public void onFailure(Call<LessonResArrDTO> call, Throwable t) {
-                        Toast.makeText(getContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
-                    }
-                });
+        lessonPackAdapter.notifyDataSetChanged();
+        CommonUtils.setProgressBar(lessonPackProgressBar);
     }
+
+//    private void loadLessonRes(){
+//        lessonPackProgressBar.setVisibility(ProgressBar.VISIBLE);
+//        LessonDTOService.getInstance()
+//                .getJSONApi()
+//                .getLessonRes()
+//                .enqueue(new Callback<LessonResArrDTO>() {
+//                    @Override
+//                    public void onResponse(Call<LessonResArrDTO> call, Response<LessonResArrDTO> response) {
+////                        Toast.makeText(getContext(), TAG + "onResponse", Toast.LENGTH_LONG).show();
+//                        lessonPackEntryList.clear();
+//                        if (response.body() != null){
+//                            LessonResDTO[] list = response.body().getResourcies();
+//                            for (LessonResDTO item : list){
+//                                if (item.getTitle().contains("(УКР)")){
+//                                    LessonPackEntry lessonPackEntry = new LessonPackEntry(item.getTitle(),
+//                                            null, item.getMain_image(), null, item.getPk());
+//                                    lessonPackEntryList.add(lessonPackEntry);
+//                                }
+//                            }
+//                            lessonPackAdapter.notifyDataSetChanged();
+//                        }
+//                        CommonUtils.setProgressBar(lessonPackProgressBar);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<LessonResArrDTO> call, Throwable t) {
+//                        Toast.makeText(getContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//    }
 
     @Override
     public void setOnClick(int pk, String title, View v) {

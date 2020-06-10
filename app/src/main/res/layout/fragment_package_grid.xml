@@ -20,6 +20,8 @@
 
     <include layout="@layout/progressbar_top"/>
 
+<!--    <include layout="@layout/fab"/>-->
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -38,7 +40,7 @@
         android:id="@+id/package_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_marginTop="56dp"
         android:background="@color/packageGridBackgroundColor"
         android:paddingStart="@dimen/package_grid_spacing"

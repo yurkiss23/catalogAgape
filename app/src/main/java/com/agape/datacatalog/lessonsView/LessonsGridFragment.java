@@ -1,6 +1,7 @@
 package com.agape.datacatalog.lessonsView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ import com.agape.datacatalog.lessonsView.dto.LessonDtlDTO;
 import com.agape.datacatalog.lessonsView.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonEntry;
 import com.agape.datacatalog.utility.CommonUtils;
+import com.agape.datacatalog.utility.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
     private LessonCardRecyclerViewAdapter lessonAdapter;
     private Toolbar lessonToolbar;
     private ProgressBar lessonProgressbar;
-    private List<LessonEntry> lessonEntryList;
+//    private List<LessonEntry> lessonEntryList;
 
     private int id;
     private String title;
@@ -63,6 +65,7 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         Log.d(TAG, "---LessonsGridFragment---onCreateView---" + id);
         View view = inflater.inflate(R.layout.fragment_lessons_grid, container, false);
 
@@ -95,15 +98,15 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
 //    }
 
     private void setRecyclerView(){
-        lessonEntryList = new ArrayList<>();
-        lessonAdapter = new LessonCardRecyclerViewAdapter(lessonEntryList, this);
+//        lessonEntryList = new ArrayList<>();
+        lessonAdapter = new LessonCardRecyclerViewAdapter(ListUtils.lessonEntryList, this);
         CommonUtils.setRecyclerView(lessonRecyclerView, lessonAdapter,
-                getActivity(), getResources(), new int[]{1, 2}, "");
+                getActivity(), getResources(), new int[]{1, 2}, "2");
     }
 
     private void loadAllLesson(){
         lessonProgressbar.setVisibility(ProgressBar.VISIBLE);
-        lessonEntryList.clear();
+        ListUtils.lessonEntryList.clear();
         getPages();
         CommonUtils.setProgressBar(lessonProgressbar);
 //        LessonDTOService.getInstance()
@@ -171,9 +174,9 @@ public class LessonsGridFragment extends Fragment implements LessonGridOnClickLi
                                         item.getTitle(),null,
                                         "http://77.120.115.215/agape/api/media/index/logo/logo.png",
                                         item.getPk());
-                                lessonEntryList.add(lessonEntry);
+                                ListUtils.lessonEntryList.add(lessonEntry);
                             }
-                            Log.d(TAG, "---addList---" + lessonEntryList.size());
+                            Log.d(TAG, "---addList---" + ListUtils.lessonEntryList.size());
                             lessonAdapter.notifyDataSetChanged();
                         }
                     }
