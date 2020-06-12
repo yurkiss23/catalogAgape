@@ -69,7 +69,6 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
         setOnScrollNewsGrid();
         setOnClickNewsFAB();
 //        loadAllNews();
-//        newsFab.show();
 
         return view;
     }
@@ -123,15 +122,18 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
         newsProgressBar.setVisibility(ProgressBar.VISIBLE);
         newsAdapter.notifyDataSetChanged();
         CommonUtils.setProgressBar(newsProgressBar);
-//        newsFab.show();
     }
 
     private void setOnScrollNewsGrid(){
         newsView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                Toast.makeText(getContext(), TAG + "scroll", Toast.LENGTH_SHORT).show();
-                newsFab.show();
+//                Toast.makeText(getContext(), TAG + "scroll" + scrollX + " " + scrollY + " " + oldScrollX + " " + oldScrollY, Toast.LENGTH_LONG).show();
+                if (scrollY > 200){
+                    newsFab.show();
+                }else {
+                    newsFab.hide();
+                }
             }
         });
     }
@@ -142,7 +144,6 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
             public void onClick(View v) {
 //                Toast.makeText(getContext(), TAG + "to_top", Toast.LENGTH_SHORT).show();
                 newsView.fullScroll(ScrollView.FOCUS_UP);
-                newsFab.setVisibility(FloatingActionButton.GONE);
             }
         });
     }
