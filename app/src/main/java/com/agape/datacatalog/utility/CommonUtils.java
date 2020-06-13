@@ -8,11 +8,13 @@ import android.content.res.Resources;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.agape.datacatalog.application.CatalogAgape;
 import com.agape.datacatalog.lessonsView.LessonsGridFragment;
 import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.packageView.PackageGridItemDecoration;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.concurrent.TimeUnit;
 
@@ -116,7 +119,9 @@ public final class CommonUtils {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                ((NavigationHost)activity).navigateTo(new LessonsGridFragment(item.getItemId(), title),true);
+                String nTitle = title + " " + Character.toString(item.getTitle().charAt(0));
+//                Toast.makeText(activity, nTitle, Toast.LENGTH_LONG).show();
+                ((NavigationHost)activity).navigateTo(new LessonsGridFragment(item.getItemId(), nTitle),true);
                 return false;
             }
         });
@@ -128,6 +133,31 @@ public final class CommonUtils {
         }else {
             Toast.makeText(context, "Уроки в розробці", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void setOnScrollGrid(NestedScrollView scrollView, FloatingActionButton fab){
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                Toast.makeText(getContext(), TAG + "scroll" + scrollX + " " + scrollY + " " + oldScrollX + " " + oldScrollY, Toast.LENGTH_LONG).show();
+                setOnClickFAB(scrollView, fab);
+                if (scrollY > 200){
+                    fab.show();
+                }else {
+                    fab.hide();
+                }
+            }
+        });
+    }
+
+    public static void setOnClickFAB(NestedScrollView scrollView, FloatingActionButton fab){
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getContext(), TAG + "to_top", Toast.LENGTH_SHORT).show();
+                scrollView.fullScroll(ScrollView.FOCUS_UP);
+            }
+        });
     }
 
 //    public static ProgressDialog showLoading(Context context) {

@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/arrow_back"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
             app:title="@string/lessons_label" />
     </com.google.android.material.appbar.AppBarLayout>
 

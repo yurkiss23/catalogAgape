@@ -84,7 +84,8 @@ public final class ListUtils {
                         if (response.body() != null){
                             newsEntryList.clear();
                             NewsResDTO[] list = response.body().getPopular_news();
-                            for (NewsResDTO item : list){
+                            for (int i = 0; i < 50; ++i){
+                                NewsResDTO item = list[i];
                                 NewsEntry newsEntry = new NewsEntry(item.getTitle(), null, null,
                                         NewsDTOService.getNewsUrl()[1] + item.getMain_image(), item.getPk());
                                 newsEntryList.add(newsEntry);

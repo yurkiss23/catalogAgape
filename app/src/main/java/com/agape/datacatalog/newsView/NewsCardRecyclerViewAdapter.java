@@ -53,7 +53,7 @@ public class NewsCardRecyclerViewAdapter extends RecyclerView.Adapter<NewsCardVi
             holder.getView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showListener.showItem(news.url);
+                    showListener.showItem(newsList.get(position).pk);
                 }
             });
         }

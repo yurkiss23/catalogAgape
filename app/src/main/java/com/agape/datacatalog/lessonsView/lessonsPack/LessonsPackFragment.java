@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,7 @@ import com.agape.datacatalog.lessonsView.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonPackEntry;
 import com.agape.datacatalog.utility.CommonUtils;
 import com.agape.datacatalog.utility.ListUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
     private Toolbar lessonPackToolbar;
 //    private List<LessonPackEntry> lessonPackEntryList;
     private ProgressBar lessonPackProgressBar;
+    private FloatingActionButton lessonPackFab;
+    private NestedScrollView lessonPackView;
 
     public static List<int[]> subPackList;
 
@@ -66,6 +70,8 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
         lessonPackRecyclerView = view.findViewById(R.id.lessons_recycler_view);
         lessonPackToolbar = view.findViewById(R.id.lessons_app_bar);
         lessonPackProgressBar = view.findViewById(R.id.pb_loading);
+        lessonPackFab = view.findViewById(R.id.floating_action_button);
+        lessonPackView = view.findViewById(R.id.lessons_grid);
     }
 
     private void setRecyclerView(){
@@ -79,6 +85,7 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
         lessonPackProgressBar.setVisibility(ProgressBar.VISIBLE);
         lessonPackAdapter.notifyDataSetChanged();
         CommonUtils.setProgressBar(lessonPackProgressBar);
+        CommonUtils.setOnScrollGrid(lessonPackView, lessonPackFab);
     }
 
 //    private void loadLessonRes(){

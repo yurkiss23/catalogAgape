@@ -19,6 +19,8 @@
 
     <include layout="@layout/progressbar_top"/>
 
+    <include layout="@layout/news_card2"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

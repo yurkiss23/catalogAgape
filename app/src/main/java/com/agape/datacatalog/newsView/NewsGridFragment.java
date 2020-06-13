@@ -16,26 +16,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.R;
 import com.agape.datacatalog.network.entries.NewsEntry;
 import com.agape.datacatalog.newsView.click_listener.OnShowListener;
-import com.agape.datacatalog.newsView.dto.NewsResArrDTO;
-import com.agape.datacatalog.newsView.dto.NewsResDTO;
-import com.agape.datacatalog.newsView.network.NewsDTOService;
 import com.agape.datacatalog.utility.CommonUtils;
 import com.agape.datacatalog.utility.ListUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NewsGridFragment extends Fragment implements OnShowListener {
 
@@ -66,8 +54,6 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
         CommonUtils.setUpToolBar(newsToolbar, getActivity());
         setRecyclerView();
         loadNewsList();
-        setOnScrollNewsGrid();
-        setOnClickNewsFAB();
 //        loadAllNews();
 
         return view;
@@ -122,31 +108,33 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
         newsProgressBar.setVisibility(ProgressBar.VISIBLE);
         newsAdapter.notifyDataSetChanged();
         CommonUtils.setProgressBar(newsProgressBar);
+        CommonUtils.setOnScrollGrid(newsView, newsFab);
     }
 
-    private void setOnScrollNewsGrid(){
-        newsView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                Toast.makeText(getContext(), TAG + "scroll" + scrollX + " " + scrollY + " " + oldScrollX + " " + oldScrollY, Toast.LENGTH_LONG).show();
-                if (scrollY > 200){
-                    newsFab.show();
-                }else {
-                    newsFab.hide();
-                }
-            }
-        });
-    }
-
-    private void setOnClickNewsFAB(){
-        newsFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(getContext(), TAG + "to_top", Toast.LENGTH_SHORT).show();
-                newsView.fullScroll(ScrollView.FOCUS_UP);
-            }
-        });
-    }
+//    private void setOnScrollNewsGrid(){
+//        newsView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+////                Toast.makeText(getContext(), TAG + "scroll" + scrollX + " " + scrollY + " " + oldScrollX + " " + oldScrollY, Toast.LENGTH_LONG).show();
+//                setOnClickNewsFAB();
+//                if (scrollY > 200){
+//                    newsFab.show();
+//                }else {
+//                    newsFab.hide();
+//                }
+//            }
+//        });
+//    }
+//
+//    private void setOnClickNewsFAB(){
+//        newsFab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(getContext(), TAG + "to_top", Toast.LENGTH_SHORT).show();
+//                newsView.fullScroll(ScrollView.FOCUS_UP);
+//            }
+//        });
+//    }
 
 //    private void loadAllNews(){
 //        Log.d(TAG, "---loadAllNews---newsEntryList-size = " + newsEntryList.size());
@@ -185,8 +173,8 @@ public class NewsGridFragment extends Fragment implements OnShowListener {
     }
 
     @Override
-    public void showItem(String url) {
+    public void showItem(int pk) {
         Log.d(TAG, "---showItem---");
-        ((NavigationHost)getActivity()).navigateTo(new NewsItemFragment(), true);
+        ((NavigationHost)getActivity()).navigateTo(new NewsItemFragment(pk), true);
     }
 }
