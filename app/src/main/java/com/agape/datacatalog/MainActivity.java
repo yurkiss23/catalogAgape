@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
         if (savedInstanceState == null){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new PackageGridFragment())
+                    .add(R.id.container, new StartFragment())
                     .commit();
         }
     }
