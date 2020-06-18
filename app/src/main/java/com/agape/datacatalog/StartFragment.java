@@ -3,6 +3,7 @@ package com.agape.datacatalog;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,11 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.agape.datacatalog.packageView.PackageGridFragment;
 import com.agape.datacatalog.utility.CommonUtils;
+import com.agape.datacatalog.utility.ListUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +30,7 @@ public class StartFragment extends Fragment {
 
     private ImageView imgLogoStart;
     private ProgressBar progressBar;
+    private ToggleButton themeToggleButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,9 @@ public class StartFragment extends Fragment {
 
         setupViews(view);
 
+        initDataLists();
+
+        setThemeToggleButton();
         fadeStartLogo(imgLogoStart);
         setLogoClick();
 
@@ -49,6 +58,7 @@ public class StartFragment extends Fragment {
     private void setupViews(View view){
         imgLogoStart = view.findViewById(R.id.start_image_small);
         progressBar = view.findViewById(R.id.pb_loading);
+        themeToggleButton = view.findViewById(R.id.toggle_theme);
     }
 
     private void fadeStartLogo(ImageView view){
@@ -82,6 +92,27 @@ public class StartFragment extends Fragment {
                 progressBar.setVisibility(ProgressBar.VISIBLE);
                 CommonUtils.setProgressBar(progressBar);
                 ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), false);
+            }
+        });
+    }
+
+    private void initDataLists(){
+        ListUtils.initLists();
+    }
+
+    private void setThemeToggleButton(){
+        themeToggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getContext(), "---clickToggle---", Toast.LENGTH_SHORT).show();
+                if (themeToggleButton.getBackgroundTintList() == ColorStateList.valueOf(getResources()
+                        .getColor(R.color.colorPrimaryDark, null))){
+                    themeToggleButton.setBackgroundTintList(ColorStateList
+                            .valueOf(getResources().getColor(R.color.tu_colorPrimaryDark, null)));
+                }else {
+                    themeToggleButton.setBackgroundTintList(ColorStateList
+                            .valueOf(getResources().getColor(R.color.colorPrimaryDark, null)));
+                }
             }
         });
     }

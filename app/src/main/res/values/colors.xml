@@ -9,4 +9,10 @@
     <color name="packageGridBackgroundColor">@color/colorPrimary</color>
 
     <color name="start_background">#FFFFFF</color>
+
+    <!-- turquoise colors -->
+    <color name="tu_colorPrimary">#7FEBFF</color>
+    <color name="tu_colorPrimaryDark">#54E4FF</color>
+    <color name="tu_colorAccent">#1B90A6</color>
+    <color name="tu_packageGridBackgroundColor">@color/tu_colorPrimary</color>
 </resources>

@@ -1,12 +1,16 @@
 package com.agape.datacatalog;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.network.entries.LessonEntry;
@@ -63,6 +67,38 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
     @Override
     public void backTo() {
         FragmentManager manager = getSupportFragmentManager();
-        manager.popBackStack();
+        if (manager.getBackStackEntryCount() != 0){
+            manager.popBackStack();
+//            return;
+        }
+        Log.d(TAG, "---backTo---");
+    }
+
+    @Override
+    public void onBackPressed(){
+//        Toast.makeText(this, "Вийти з додатку?", Toast.LENGTH_SHORT).show();
+        openQuitDialog();
+    }
+
+    private void openQuitDialog() {
+        AlertDialog.Builder quitDialog = new AlertDialog.Builder(this);
+        quitDialog.setTitle("Справді вийти з додатку?");
+
+        quitDialog.setPositiveButton("Так", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                finish();
+            }
+        });
+
+        quitDialog.setNegativeButton("Ні", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        quitDialog.show();
     }
 }

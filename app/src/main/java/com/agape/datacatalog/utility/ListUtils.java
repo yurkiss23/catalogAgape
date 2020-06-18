@@ -11,6 +11,7 @@ import com.agape.datacatalog.lessonsView.network.LessonDTOService;
 import com.agape.datacatalog.network.entries.LessonEntry;
 import com.agape.datacatalog.network.entries.LessonPackEntry;
 import com.agape.datacatalog.network.entries.NewsEntry;
+import com.agape.datacatalog.network.entries.PackageEntry;
 import com.agape.datacatalog.newsView.dto.NewsResArrDTO;
 import com.agape.datacatalog.newsView.dto.NewsResDTO;
 import com.agape.datacatalog.newsView.network.NewsDTOService;
@@ -28,6 +29,7 @@ public final class ListUtils {
     public static List<LessonPackEntry> lessonPackEntryList;
     public static List<LessonEntry> lessonEntryList;
     public static List<NewsEntry> newsEntryList, newsEntryDtlList;
+    public static List<PackageEntry> packageEntryList;
 
     public static void initLists(){
 //        Toast.makeText(CatalogAgape.getAppContext(), TAG, Toast.LENGTH_SHORT).show();
@@ -35,6 +37,7 @@ public final class ListUtils {
         lessonEntryList = new ArrayList<>();
         newsEntryList = new ArrayList<>();
         newsEntryDtlList = new ArrayList<>();
+        packageEntryList = new ArrayList<>();
 
         loadLessonRes();
         loadAllNews();
@@ -83,12 +86,19 @@ public final class ListUtils {
 //                        Toast.makeText(CatalogAgape.getAppContext(), "---onResponse---", Toast.LENGTH_LONG).show();
                         if (response.body() != null){
                             newsEntryList.clear();
+                            packageEntryList.clear();
                             NewsResDTO[] list = response.body().getPopular_news();
                             for (int i = 0; i < 50; ++i){
                                 NewsResDTO item = list[i];
                                 NewsEntry newsEntry = new NewsEntry(item.getTitle(), null, null,
                                         NewsDTOService.getNewsUrl()[1] + item.getMain_image(), item.getPk());
+                                PackageEntry packageEntry = new PackageEntry(item.getTitle(), null, null,
+                                        NewsDTOService.getNewsUrl()[1] + item.getMain_image(), item.getPk());
                                 newsEntryList.add(newsEntry);
+                                if (packageEntryList.size() < 4){
+                                    Log.d(TAG, "---loadAllNews---packEntryList-size = " + packageEntryList.size());
+                                    packageEntryList.add(packageEntry);
+                                }
                             }
 //                            newsAdapter.notifyDataSetChanged();
                         }

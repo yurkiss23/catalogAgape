@@ -29,10 +29,12 @@ import com.agape.datacatalog.R;
 import com.agape.datacatalog.lessonsView.lessonsPack.LessonsPackFragment;
 import com.agape.datacatalog.network.entries.PackageEntry;
 import com.agape.datacatalog.newsView.NewsGridFragment;
+import com.agape.datacatalog.newsView.NewsItemFragment;
+import com.agape.datacatalog.packageView.click_listener.OnShowListener;
 import com.agape.datacatalog.utility.CommonUtils;
 import com.agape.datacatalog.utility.ListUtils;
 
-public class PackageGridFragment extends Fragment {
+public class PackageGridFragment extends Fragment implements OnShowListener {
 
     private final String TAG = "MyLOG_PGF";
 
@@ -55,10 +57,11 @@ public class PackageGridFragment extends Fragment {
         Log.d(TAG, "---PackageGridFragment---onCreateView---");
         View view = inflater.inflate(R.layout.fragment_package_grid, container, false);
 
+//        initDataLists();
+
         setupViews(view);
         setUpToolBar(view);
         setRecyclerView(view);
-        initDataLists();
 
         setBtnNews();
         setBtnLessons();
@@ -77,6 +80,8 @@ public class PackageGridFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         toolbar = view.findViewById(R.id.package_app_bar);
         packageProgressBar = view.findViewById(R.id.pb_loading);
+        packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()),
+                this, getContext());
     }
 
     private void setUpToolBar(View view){
@@ -93,7 +98,9 @@ public class PackageGridFragment extends Fragment {
     }
 
     private void setRecyclerView(View view){
-        packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
+//        packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()));
+        packageAdapter = new PackageCardRecyclerViewAdapter(ListUtils.packageEntryList,
+                this, getContext());
         CommonUtils.setRecyclerView(recyclerView, packageAdapter,
                 getActivity(), getResources(), new int[]{1, 2}, null);
 //        recyclerView.setHasFixedSize(true);
@@ -109,9 +116,15 @@ public class PackageGridFragment extends Fragment {
         }
     }
 
-    private void initDataLists(){
-        ListUtils.initLists();
-    }
+//    private void initDataLists(){
+//        ListUtils.initLists();
+//    }
+//
+//    private void loadPackageList(){
+//        packageProgressBar.setVisibility(ProgressBar.VISIBLE);
+//        packageAdapter.notifyDataSetChanged();
+//        CommonUtils.setProgressBar(packageProgressBar);
+//    }
 
     private void setBtnNews(){
         btnNews.setOnClickListener(new View.OnClickListener() {
@@ -162,5 +175,11 @@ public class PackageGridFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.toolbar_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void showItem(int pk) {
+        Log.d(TAG, "---showItem---");
+        ((NavigationHost)getActivity()).navigateTo(new NewsItemFragment(pk), true);
     }
 }

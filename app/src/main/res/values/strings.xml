@@ -4,7 +4,7 @@
     <string name="colorScheme1">https://colorscheme.ru/#3bj1Tw0w0w0w0</string>
     <string name="colorScheme2">https://colorscheme.ru/#0Ok1Tw0w0w0w0</string>
     <string name="colorScheme3">https://colorscheme.ru/#1lk1Tw0w0w0w0</string>
-    <string name="colorScheme4">https://colorscheme.ru/#3m11TlZ--w0w0</string>
+    <string name="turquoiseScheme4">https://colorscheme.ru/#3m11TlZ--w0w0</string>
 
     <!-- keys API -->
 
@@ -33,4 +33,5 @@
     <string name="first_year">1-й рік навчання</string>
     <string name="second_year">2-й рік навчання</string>
     <string name="lesson_number">Номер</string>
+    <string name="last_news">Останні новини</string>
 </resources>

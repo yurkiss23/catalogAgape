@@ -67,6 +67,7 @@ public final class CommonUtils {
             @Override
             public void onClick(View v) {
 //                ((NavigationHost)activity).navigateTo(new PackageGridFragment(), false);
+
                 ((NavigationHost)activity).backTo();
             }
         });
