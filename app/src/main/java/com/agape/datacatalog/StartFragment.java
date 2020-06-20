@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.agape.datacatalog.application.CatalogAgape;
 import com.agape.datacatalog.packageView.PackageGridFragment;
 import com.agape.datacatalog.utility.CommonUtils;
 import com.agape.datacatalog.utility.ListUtils;
@@ -31,26 +32,27 @@ public class StartFragment extends Fragment {
     private ImageView imgLogoStart;
     private ProgressBar progressBar;
     private ToggleButton themeToggleButton;
+    private int flag;// = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+//    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+//        Toast.makeText(getContext(), Integer.toString(flag), Toast.LENGTH_LONG).show();
         View view = inflater.inflate(R.layout.fragment_start, container, false);
 
         setupViews(view);
-
+        initToggleButton();
         initDataLists();
 
-        setThemeToggleButton();
+        setThemeToggleButton(view);
         fadeStartLogo(imgLogoStart);
-        setLogoClick();
+        setLogoClick(view);
 
         return view;
     }
@@ -59,6 +61,30 @@ public class StartFragment extends Fragment {
         imgLogoStart = view.findViewById(R.id.start_image_small);
         progressBar = view.findViewById(R.id.pb_loading);
         themeToggleButton = view.findViewById(R.id.toggle_theme);
+    }
+
+    private void initToggleButton(){
+//        Toast.makeText(getContext(), Integer.toString(flag), Toast.LENGTH_LONG).show();
+        if (flag > 0){
+            getActivity().setTheme(R.style.TurquoiseTheme);
+            themeToggleButton.setBackground(getResources().getDrawable(R.drawable.toggle_turquoise, null));
+            themeToggleButton.setBackgroundTintList(ColorStateList
+                    .valueOf(getResources().getColor(R.color.tu_colorPrimaryDark, null)));
+            flag = 1;
+            return;
+        }
+//        getActivity().getTheme()
+//        int name = getActivity().getTheme().getResources().hashCode();
+//        Toast.makeText(getContext(), name, Toast.LENGTH_LONG).show();
+//        if (getActivity().getTheme()){
+//            themeToggleButton.setBackground(getResources().getDrawable(R.drawable.toggle_default, null));
+//            themeToggleButton.setBackgroundTintList(ColorStateList
+//                    .valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+//            return;
+//        }
+//        themeToggleButton.setBackground(getResources().getDrawable(R.drawable.toggle_turquoise, null));
+//        themeToggleButton.setBackgroundTintList(ColorStateList
+//                .valueOf(getResources().getColor(R.color.tu_colorPrimaryDark)));
     }
 
     private void fadeStartLogo(ImageView view){
@@ -84,14 +110,14 @@ public class StartFragment extends Fragment {
         total.start();
     }
 
-    private void setLogoClick(){
+    private void setLogoClick(View view){
         imgLogoStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "---logoClick_onClick---");
                 progressBar.setVisibility(ProgressBar.VISIBLE);
                 CommonUtils.setProgressBar(progressBar);
-                ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), false);
+                ((NavigationHost)getActivity()).navigateTo(new PackageGridFragment(), true);
             }
         });
     }
@@ -100,7 +126,8 @@ public class StartFragment extends Fragment {
         ListUtils.initLists();
     }
 
-    private void setThemeToggleButton(){
+    private void setThemeToggleButton(View view){
+//        progressBar = view.findViewById(R.id.pb_loading);
         themeToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,10 +136,18 @@ public class StartFragment extends Fragment {
                         .getColor(R.color.colorPrimaryDark, null))){
                     themeToggleButton.setBackgroundTintList(ColorStateList
                             .valueOf(getResources().getColor(R.color.tu_colorPrimaryDark, null)));
+                    getActivity().setTheme(R.style.TurquoiseTheme);
+                    progressBar.setVisibility(ProgressBar.VISIBLE);
+                    flag = 1;
                 }else {
                     themeToggleButton.setBackgroundTintList(ColorStateList
                             .valueOf(getResources().getColor(R.color.colorPrimaryDark, null)));
+                    getActivity().setTheme(R.style.AppTheme);
+                    progressBar.setVisibility(ProgressBar.VISIBLE);
+                    flag = 0;
                 }
+                CommonUtils.setProgressBar(progressBar);
+//                Toast.makeText(getContext(), Integer.toString(flag), Toast.LENGTH_LONG).show();
             }
         });
     }

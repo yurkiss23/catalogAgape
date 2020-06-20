@@ -46,12 +46,12 @@
 <!--        android:text="@string/last_news"/>-->
 
     <androidx.core.widget.NestedScrollView
+        style="@style/packageGridBackgroundColor"
         android:id="@+id/package_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
         android:layout_marginTop="56dp"
-        android:background="@color/packageGridBackgroundColor"
         android:paddingStart="@dimen/package_grid_spacing"
         android:paddingEnd="@dimen/package_grid_spacing"
         android:elevation="8dp"

@@ -2,6 +2,7 @@ package com.agape.datacatalog.packageView;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.agape.datacatalog.MainActivity;
 import com.agape.datacatalog.NavigationHost;
@@ -43,6 +45,7 @@ public class PackageGridFragment extends Fragment implements OnShowListener {
     private PackageCardRecyclerViewAdapter packageAdapter;
     private Toolbar toolbar;
     private ProgressBar packageProgressBar;
+//    private ToggleButton themeToggleButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class PackageGridFragment extends Fragment implements OnShowListener {
         setBtnLessons();
         setBtnVideos();
         setBtnToStart();
+//        setThemeToggleButton();
 
         return view;
     }
@@ -82,6 +86,7 @@ public class PackageGridFragment extends Fragment implements OnShowListener {
         packageProgressBar = view.findViewById(R.id.pb_loading);
         packageAdapter = new PackageCardRecyclerViewAdapter(PackageEntry.initProductEntryList(getResources()),
                 this, getContext());
+//        themeToggleButton = view.findViewById(R.id.toggle_theme);
     }
 
     private void setUpToolBar(View view){
@@ -170,6 +175,25 @@ public class PackageGridFragment extends Fragment implements OnShowListener {
             }
         });
     }
+
+//    private void setThemeToggleButton(){
+//        themeToggleButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(getContext(), "---clickToggle---", Toast.LENGTH_SHORT).show();
+//                if (themeToggleButton.getBackgroundTintList() == ColorStateList.valueOf(getResources()
+//                        .getColor(R.color.colorPrimaryDark, null))){
+//                    themeToggleButton.setBackgroundTintList(ColorStateList
+//                            .valueOf(getResources().getColor(R.color.tu_colorPrimaryDark, null)));
+//                    getContext().setTheme(R.style.TurquoiseTheme);
+//                }else {
+//                    themeToggleButton.setBackgroundTintList(ColorStateList
+//                            .valueOf(getResources().getColor(R.color.colorPrimaryDark, null)));
+//                    getContext().setTheme(R.style.AppTheme);
+//                }
+//            }
+//        });
+//    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

@@ -69,7 +69,7 @@ public final class ListUtils {
 
                     @Override
                     public void onFailure(Call<LessonResArrDTO> call, Throwable t) {
-                        Toast.makeText(CatalogAgape.getAppContext(), TAG + "onFailure", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CatalogAgape.getAppContext(), TAG + "Мережа недоступна", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -107,7 +107,7 @@ public final class ListUtils {
 
                     @Override
                     public void onFailure(Call<NewsResArrDTO> call, Throwable t) {
-                        Toast.makeText(CatalogAgape.getAppContext(), "---onFailure---", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CatalogAgape.getAppContext(), "Мережа недоступна", Toast.LENGTH_LONG).show();
                     }
                 });
     }

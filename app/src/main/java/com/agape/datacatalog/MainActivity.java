@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity implements NavigationHost{
     @Override
     public void onBackPressed(){
 //        Toast.makeText(this, "Вийти з додатку?", Toast.LENGTH_SHORT).show();
-        openQuitDialog();
+        FragmentManager manager = getSupportFragmentManager();
+        if (manager.getBackStackEntryCount() == 0){
+            openQuitDialog();
+            return;
+        }
+        backTo();
     }
 
     private void openQuitDialog() {
