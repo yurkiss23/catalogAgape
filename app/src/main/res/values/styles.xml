@@ -9,12 +9,22 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <!-- Base application theme. -->
+    <!-- alt application theme. -->
     <style name="TurquoiseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/tu_colorPrimary</item>
         <item name="colorPrimaryDark">@color/tu_colorPrimaryDark</item>
         <item name="colorAccent">@color/tu_colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <!-- org theme. -->
+    <style name="OrgTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/org_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/org_colorPrimaryDark</item>
+        <item name="colorAccent">@color/org_colorAccent</item>
+        <item name="color">@color/org_colorProgressBar</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
@@ -29,6 +39,7 @@
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:backgroundTint">?attr/colorPrimary</item>
         <item name="cardBackgroundColor">?attr/colorPrimaryDark</item>
+        <item name="android:shadowRadius">16</item>
     </style>
 
     <style name="TextAppearance.Agape.Toolbar" parent="TextAppearance.MaterialComponents.Button">
@@ -42,10 +53,11 @@
 
     <style name="Widget.Agape.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">?attr/colorPrimary</item>
+<!--        <item name="android:textStyle">italic</item>-->
     </style>
 
     <style name="Widget.Agape.Backdrop" parent="">
-        <item name="android:background">?attr/colorAccent</item>
+        <item name="android:background">?attr/color</item>
     </style>
 
     <style name="TextAppearance.Shrine.Title" parent="TextAppearance.MaterialComponents.Headline4">
@@ -59,7 +71,7 @@
     </style>
 
     <style name="My.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">?attr/colorAccent</item>
+        <item name="android:progressDrawable">?attr/color</item>
     </style>
     
     <style name="FAB.Button" parent="Widget.MaterialComponents.FloatingActionButton">

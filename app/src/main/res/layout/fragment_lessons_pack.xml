@@ -42,14 +42,16 @@
         android:layout_marginTop="56dp"
         android:paddingStart="@dimen/package_grid_spacing"
         android:paddingEnd="@dimen/package_grid_spacing"
-        android:elevation="8dp"
+        android:elevation="16dp"
+        android:outlineSpotShadowColor="@color/colorPrimaryText"
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lessons_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:elevation="16dp"/>
 
     </androidx.core.widget.NestedScrollView>
 

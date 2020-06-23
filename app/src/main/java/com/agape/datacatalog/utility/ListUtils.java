@@ -56,11 +56,11 @@ public final class ListUtils {
                         if (response.body() != null){
                             LessonResDTO[] list = response.body().getResourcies();
                             for (LessonResDTO item : list){
-                                if (item.getTitle().contains("(УКР)")){
+//                                if (item.getTitle().contains("(УКР)")){
                                     LessonPackEntry lessonPackEntry = new LessonPackEntry(item.getTitle(),
                                             null, item.getMain_image(), null, item.getPk());
                                     lessonPackEntryList.add(lessonPackEntry);
-                                }
+//                                }
                             }
 //                            lessonPackAdapter.notifyDataSetChanged();
                         }

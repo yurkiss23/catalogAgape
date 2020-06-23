@@ -15,4 +15,10 @@
     <color name="tu_colorPrimaryDark">#54E4FF</color>
     <color name="tu_colorAccent">#1B90A6</color>
     <color name="tu_packageGridBackgroundColor">@color/tu_colorPrimary</color>
+
+    <!-- org colors -->
+    <color name="org_colorPrimary">#FDFDFD</color>
+    <color name="org_colorPrimaryDark">#EBEBEB</color>
+    <color name="org_colorAccent">#FF0000</color>
+    <color name="org_colorProgressBar">#9A9A9A</color>
 </resources>

@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name="com.agape.datacatalog.application.CatalogAgape"
-        android:theme="@style/AppTheme"
+        android:theme="@style/OrgTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity">
             <intent-filter>

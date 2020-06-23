@@ -137,8 +137,8 @@ public class PackageGridFragment extends Fragment implements OnShowListener {
             public void onClick(View v) {
                 packageProgressBar.setVisibility(ProgressBar.VISIBLE);
                 CommonUtils.setProgressBar(packageProgressBar);
-//                Toast.makeText(getContext(), "Роділ в розробці", Toast.LENGTH_LONG).show();
-                ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), true);
+                Toast.makeText(getContext(), "Роділ в оновлюється", Toast.LENGTH_LONG).show();
+//                ((NavigationHost)getActivity()).navigateTo(new NewsGridFragment(), true);
             }
         });
     }

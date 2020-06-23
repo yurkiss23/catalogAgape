@@ -1,8 +1,10 @@
 package com.agape.datacatalog.lessonsView.lessonsPack;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -10,12 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.agape.datacatalog.MainActivity;
 import com.agape.datacatalog.R;
+import com.agape.datacatalog.StartFragment;
 import com.agape.datacatalog.lessonsView.click_listener.LessonPackOnClickListener;
 import com.agape.datacatalog.lessonsView.dto.LessonResArrDTO;
 import com.agape.datacatalog.lessonsView.dto.LessonResDTO;
@@ -48,7 +55,10 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
     public static List<int[]> subPackList;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -157,4 +167,20 @@ public class LessonsPackFragment extends Fragment implements LessonPackOnClickLi
                     }
                 });
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if (item.getItemId() == R.id.agape_logo){
+            Intent intent = new Intent(this.getContext(), MainActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+
 }

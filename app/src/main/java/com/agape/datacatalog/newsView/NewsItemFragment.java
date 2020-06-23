@@ -13,7 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.agape.datacatalog.NavigationHost;
 import com.agape.datacatalog.R;
+import com.agape.datacatalog.StartFragment;
 import com.agape.datacatalog.network.IpDTO;
 import com.agape.datacatalog.network.IpDTOService;
 import com.agape.datacatalog.network.requester.ImageRequester;
